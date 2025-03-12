@@ -1,0 +1,10 @@
+﻿@using EF_Core.Models;
+@model List<Category>
+
+<h1>Our Categories</h1>
+
+
+@foreach(var item in Model)
+{
+    <h3 class="" style="color : aqua">@item.Name</h3>
+}
