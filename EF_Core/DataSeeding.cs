@@ -15,7 +15,7 @@ namespace EF_Core
                 new Category { Id =1 , Name = "Electronics"},
                 new Category { Id =2 , Name = "Food"},
                 new Category { Id =3 , Name = "Cloths"},
-                new Category { Id = 4 , Name = "Bauty"}
+                new Category { Id =4 , Name = "Bauty"}
                 );
 
         }

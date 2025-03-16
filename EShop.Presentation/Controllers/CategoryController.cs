@@ -1,4 +1,5 @@
 ﻿using EF_Core;
+using EF_Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShop.Presentation.Controllers
@@ -12,6 +13,32 @@ namespace EShop.Presentation.Controllers
             var list = context.Categories.ToList();
 
             return View("Index",list);
+        }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(Category category)
+        {
+            context.Categories.Add(category);
+            context.SaveChanges();
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public IActionResult Edit( int Id,string name)
+        {
+            var selected = context.Categories.FirstOrDefault(i => i.Id == Id);
+            return View(selected);
+        }
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            context.Categories.Update(category);
+            context.SaveChanges();
+            return RedirectToAction("List");
         }
         //public IActionResult testjson()
         //{
