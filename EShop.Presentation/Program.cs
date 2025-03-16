@@ -7,8 +7,10 @@ var app = builder.Build();
 
 app.UseRouting();
 
+app.UseStaticFiles();//Force WWWRoot
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Privacy}");
+    pattern: "{controller=Home}/{action=index}");
 
 app.Run();

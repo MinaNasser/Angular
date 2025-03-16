@@ -1,0 +1,26 @@
+﻿<html>
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css" />
+        @RenderSection("styles",false)
+    </head>
+    <body>
+        <div class="container-fluid">
+        <div class="row" style="height:100vh">
+            <div class="col-3 sidebar">
+                    <ul>
+                    <li>  Home  </li>
+                    <li>  Home  </li>
+                    <li>  Home  </li>
+                    <li>  Home  </li>
+                    <li>  Home  </li>
+                    </ul>
+                </div>
+                <div class="col-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        @RenderSection("scripts",false)
+    </body>
+</html>

@@ -11,7 +11,11 @@ namespace EShop.Presentation.Controllers
         {
             var list = context.Categories.ToList();
 
-            return View(list);
+            return View("Index",list);
         }
+        //public IActionResult testjson()
+        //{
+        //    return new JsonResult(new { Id = 1, Name = "Heba" });
+        //}
     }
 }
