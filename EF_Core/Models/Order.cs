@@ -1,11 +1,6 @@
 ﻿using EF_Core.Enums;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF_Core.Models
 {
@@ -16,12 +11,17 @@ namespace EF_Core.Models
         public decimal TotalPrice { get; set; }
         public int TotalQuantity { get; set; }
         public OrderStatus Status { get; set; }
-
+        public decimal? CommissionDeducted { get; set; }
+        public string? CodeApplied { get; set; }
+        public TypeOfPayment PaymentMethod { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
         public virtual Client Client { get; set; }
         public string ClientId { get; set; }
         
         public virtual ICollection<OrderItem> Items { get; set; }
 
+        public virtual Review Review { get; set; }
     }
 
     public class OrderConfigration : IEntityTypeConfiguration<Order>

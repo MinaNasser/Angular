@@ -1,11 +1,6 @@
 ﻿using EF_Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF_Core
 {
@@ -20,7 +15,9 @@ namespace EF_Core
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-
+        public DbSet<FavoriteItem> FavoriteItems { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,6 +35,9 @@ namespace EF_Core
             modelBuilder.ApplyConfiguration(new ProductAttachmentConfigration());
             modelBuilder.ApplyConfiguration(new ShopConfigration());
             modelBuilder.ApplyConfiguration(new VendorConfigration());
+            modelBuilder.ApplyConfiguration(new CartItemConfigration());
+            modelBuilder.ApplyConfiguration(new FavoriteItemConfigration());
+            modelBuilder.ApplyConfiguration(new ReviewConfigration());
 
             //init Create Tables with some Data
             modelBuilder.DataSeeding();
