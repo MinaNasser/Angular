@@ -16,7 +16,7 @@ namespace EShop.ViewModels
                 VendorId = viewModel.VendorId,
                 CreatedAt = viewModel.CreatedAt,
                 IsDelated = viewModel.IsDelated,
-                //Attachments
+                Attachments = viewModel.Paths.Select(path=> new ProductAttachment() { Image = path}).ToList()
             };
         }
         public static ProductDetailsViewModel ToDetailsVModel(this Product viewModel)

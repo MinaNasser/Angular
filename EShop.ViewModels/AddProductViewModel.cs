@@ -1,4 +1,5 @@
 ﻿using EF_Core.Models;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,8 +35,8 @@ namespace EShop.ViewModels
         //[NotMapped]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-
-        //public virtual ICollection<ProductAttachment> Attachments { get; set; }
+        public List<string> Paths { get; set; } = new List<string>();
+        public IFormFileCollection Attachments { get; set; }
     }
 
     
