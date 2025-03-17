@@ -1,1 +1,28 @@
-﻿
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<ProductDetailsViewModel>
+
+<h1>Product List</h1>
+
+
+<div class="container">
+    <div class="row">
+        @foreach(var prd in Model)
+        {
+            
+            <div class="card col-4">
+                @* <img src="..." class="card-img-top" alt="..."> *@
+                <div class="card-body">
+                    <h5 class="card-title">@prd.Name</h5>
+                    <p class="card-text">@prd.Description</p>
+                    <p class="card-text">Provided by: @prd.VendorName</p>
+                    <p class="card-text">Category Name : @prd.CategoryName</p>
+                    <p class="card-text">@prd.Price $</p>
+                    <p class="card-text">@prd.Quantity in stock</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

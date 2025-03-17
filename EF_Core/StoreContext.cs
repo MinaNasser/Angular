@@ -21,7 +21,7 @@ namespace EF_Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data source = DESKTOP-0KJMNFC; Initial catalog = E-Shopp; Integrated security= true; trustservercertificate = true;");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data source = DESKTOP-0KJMNFC; Initial catalog = E-Shopp; Integrated security= true; trustservercertificate = true;MultipleActiveResultSets=True");
             base.OnConfiguring(optionsBuilder);
         }
 
