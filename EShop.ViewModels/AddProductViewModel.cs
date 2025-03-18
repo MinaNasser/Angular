@@ -13,8 +13,10 @@ namespace EShop.ViewModels
         public string Name { get; set; }
 
 
-        [Required(ErrorMessage = "Please Provide valid Product Description")]
-        [StringLength(1000, MinimumLength = 10, ErrorMessage = "Product Description must contain at least 10 letter and max 1000 letter")]
+        //[Required(ErrorMessage = "Please Provide valid Product Description")]
+        //[StringLength(1000, MinimumLength = 10, ErrorMessage = "Product Description must contain at least 10 letter and max 1000 letter")]
+        [MultiLine]
+        //[DataType(dataType:DataType.MultilineText)]
         public string Description { get; set; }
 
 
@@ -23,6 +25,7 @@ namespace EShop.ViewModels
 
 
         [Required (ErrorMessage = "Please Provide valid Product Price Start from 5")]
+        //[DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
 
@@ -30,13 +33,16 @@ namespace EShop.ViewModels
         [DisplayName("Select Product Category")]
         public int CategoryId { get; set; }
 
+        public IFormFileCollection Attachments { get; set; }
+
+
+        //no requied to be Displayed
         public string VendorId { get; set; } = "123";
         public bool IsDelated { get; set; } = false;
         //[NotMapped]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public List<string> Paths { get; set; } = new List<string>();
-        public IFormFileCollection Attachments { get; set; }
     }
 
     

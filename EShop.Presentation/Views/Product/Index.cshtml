@@ -10,9 +10,12 @@
     <div class="row">
         @foreach(var prd in Model)
         {
-            
+
             <div class="card col-4">
-                @* <img src="..." class="card-img-top" alt="..."> *@
+                @if(prd.Images != null && prd.Images.Count >= 1)
+                {
+                    <img src="@prd.Images[0]" class="card-img-top" alt="...">
+                }
                 <div class="card-body">
                     <h5 class="card-title">@prd.Name</h5>
                     <p class="card-text">@prd.Description</p>

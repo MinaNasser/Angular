@@ -6,6 +6,12 @@ namespace EShop.ViewModels
     {
         public static Product ToModel(this AddProductViewModel viewModel)
         {
+            //List<ProductAttachment> tmp = new List<ProductAttachment>();
+            //foreach (string path in viewModel.Paths)
+            //{
+            //    tmp.Add(new ProductAttachment() { Image = path });
+            //}
+
             return new Product
             {
                 Name = viewModel.Name,
@@ -17,6 +23,7 @@ namespace EShop.ViewModels
                 CreatedAt = viewModel.CreatedAt,
                 IsDelated = viewModel.IsDelated,
                 Attachments = viewModel.Paths.Select(path=> new ProductAttachment() { Image = path}).ToList()
+                //Attachments = tmp
             };
         }
         public static ProductDetailsViewModel ToDetailsVModel(this Product viewModel)
@@ -30,7 +37,7 @@ namespace EShop.ViewModels
                 Quantity = viewModel.Quantity,
                 VendorName = viewModel.Vendor.User.UserName ?? "Not Provided",
                 CreatedAt = viewModel.CreatedAt,
-                Images = viewModel.Attachments.Select(i=>i.Image).ToList()
+                Images = viewModel.Attachments.Select(i=> i.Image ).ToList()
                 //Attachments
             };
         }

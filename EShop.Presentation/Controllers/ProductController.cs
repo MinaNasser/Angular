@@ -1,4 +1,5 @@
 ﻿using EF_Core;
+using EShop.Manegers;
 using EShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,13 +8,22 @@ namespace EShop.Presentation.Controllers
 {
     public class ProductController : Controller
     {
-        private EShopContext context = new EShopContext();
+        private EShopContext context;
+        private ProductManager ProductManager;
+        public ProductController()
+        {
+            ProductManager = new ProductManager();
+            context =  new EShopContext();
+        }
 
         //    .... /product/index
         //    .... /product
-        public IActionResult Index()
+        public IActionResult Index(string searchText = "", decimal price = 0,
+            int categoryId = 0, string vendorId = "", int pageNumber = 1,
+            int pageSize = 4)
         {
-            var list = context.Products.Select(prd => prd.ToDetailsVModel()).ToList();
+            var list = ProductManager.Search(categoryId:categoryId, vendorId:vendorId,
+                searchText: searchText,price:price,pageNumber:pageNumber,pageSize:pageSize);
             return View(list);
         }
 
@@ -48,7 +58,6 @@ namespace EShop.Presentation.Controllers
                     fileStream.Position = 0;
 
                     //save path to database;
-
                     viewModel.Paths.Add($"/Images/Products/{file.FileName}");
 
                 }

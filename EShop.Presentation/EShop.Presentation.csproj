@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EF_Core\EF_Core.csproj" />
+    <ProjectReference Include="..\EShop.Manegers\EShop.Manegers.csproj" />
     <ProjectReference Include="..\EShop.ViewModels\EShop.ViewModels.csproj" />
   </ItemGroup>
 
