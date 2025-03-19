@@ -8,20 +8,22 @@ namespace EShop.Presentation.Controllers
 {
     public class ProductController : Controller
     {
-        private EShopContext context;
         private ProductManager ProductManager;
+        private CategoryManager CategoryManager;
         public ProductController()
         {
             ProductManager = new ProductManager();
-            context =  new EShopContext();
+            CategoryManager = new CategoryManager();
         }
 
         //    .... /product/index
         //    .... /product
         public IActionResult Index(string searchText = "", decimal price = 0,
             int categoryId = 0, string vendorId = "", int pageNumber = 1,
-            int pageSize = 4)
+            int pageSize = 3)
         {
+            ViewData["CategoriesList"] = GetCategories();
+
             var list = ProductManager.Search(categoryId:categoryId, vendorId:vendorId,
                 searchText: searchText,price:price,pageNumber:pageNumber,pageSize:pageSize);
             return View(list);
@@ -62,8 +64,8 @@ namespace EShop.Presentation.Controllers
 
                 }
 
-                context.Products.Add(viewModel.ToModel());
-                context.SaveChanges();
+                ProductManager.Add(viewModel.ToModel());
+
                 return RedirectToAction("index");
             }
 
@@ -72,7 +74,7 @@ namespace EShop.Presentation.Controllers
         }
         private List<SelectListItem> GetCategories()
         {
-            return context.Categories
+            return CategoryManager.Get()
     .Select(cat => new SelectListItem(cat.Name, cat.Id.ToString())).ToList();
         }
     }
