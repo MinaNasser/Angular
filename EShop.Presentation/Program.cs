@@ -1,7 +1,20 @@
+using EF_Core;
+using EShop.Manegers;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+//DI Containers
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<EShopContext>(i =>
+i.UseLazyLoadingProxies()
+.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+//builder.Services.AddScoped(typeof(EShopContext));
+builder.Services.AddScoped(typeof(ProductManager));
+builder.Services.AddScoped(typeof(CategoryManager));
+
 
 var app = builder.Build();
 

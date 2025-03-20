@@ -1,16 +1,24 @@
-﻿using EF_Core;
-using EF_Core.Models;
+﻿using EF_Core.Models;
+using EShop.Manegers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShop.Presentation.Controllers
 {
     public class CategoryController : Controller
     {
-        private EShopContext context = new EShopContext();
+
+        private CategoryManager categoryManager;
+
+        public CategoryController(CategoryManager _categoryManager)
+        {
+            categoryManager = _categoryManager;
+        }
+
+
         //    ...... /Categry/list
         public IActionResult List()
         {
-            var list = context.Categories.ToList();
+            var list = categoryManager.Get().ToList();
 
             return View("Index",list);
         }
@@ -22,22 +30,21 @@ namespace EShop.Presentation.Controllers
         [HttpPost]
         public IActionResult Add(Category category)
         {
-            context.Categories.Add(category);
-            context.SaveChanges();
+            categoryManager.Add(category);
+            
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public IActionResult Edit( int Id,string name)
         {
-            var selected = context.Categories.FirstOrDefault(i => i.Id == Id);
+            var selected =categoryManager.GetList(i => i.Id == Id).FirstOrDefault();
             return View(selected);
         }
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            context.Categories.Update(category);
-            context.SaveChanges();
+            categoryManager.Edit(category);
             return RedirectToAction("List");
         }
         //public IActionResult testjson()

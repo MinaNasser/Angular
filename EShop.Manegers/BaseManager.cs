@@ -9,11 +9,14 @@ namespace EShop.Manegers
     {
 
         private readonly EShopContext dbcontext;
-        private  DbSet<T> table;
-        public BaseManager()
+        public DbSet<T> table;
+        public BaseManager(EShopContext _eShopContext)
         {
+
+            //dbcontext = new EShopContext();
+
             //DI
-            dbcontext = new EShopContext();
+            dbcontext = _eShopContext;
             table = dbcontext.Set<T>();
         }
 

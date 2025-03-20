@@ -1,5 +1,4 @@
-﻿using EF_Core;
-using EShop.Manegers;
+﻿using EShop.Manegers;
 using EShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,10 +9,10 @@ namespace EShop.Presentation.Controllers
     {
         private ProductManager ProductManager;
         private CategoryManager CategoryManager;
-        public ProductController()
+        public ProductController(ProductManager pmanager,CategoryManager cmanager )
         {
-            ProductManager = new ProductManager();
-            CategoryManager = new CategoryManager();
+            ProductManager = pmanager;
+            CategoryManager = cmanager;
         }
 
         //    .... /product/index
