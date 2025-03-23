@@ -26,7 +26,23 @@ namespace EShop.Manegers
 
         public async Task<IdentityResult> Register(UserRegisterVM userRegister)
         {
-           return  await UserManager.CreateAsync(userRegister.ToModel(), userRegister.Password);
+
+            var res=  await UserManager.CreateAsync(userRegister.ToModel(), userRegister.Password);
+            if (res.Succeeded)
+            {
+                User user =await UserManager.FindByNameAsync(userRegister.UserName);
+
+                res =  await  UserManager.AddToRoleAsync(user, userRegister.Role);
+
+                if(userRegister.Role == "Vendor")
+                {
+                    //
+                }else if (userRegister.Role == "Client")
+                {
+                    //
+                }
+            }
+            return res;
         }
 
         public async Task<SignInResult> Login(UserLoginVM vmodel)

@@ -1,4 +1,9 @@
-﻿<html>
+﻿@using System.Security.Claims
+@{
+    string username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+}
+
+<html>
     <head>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/dashboard.css" />
@@ -10,6 +15,8 @@
             <div class="col-3 sidebar">
                     <ul>
                         @*  <a href=""></> *@
+                    <h3>Welcome @username</h3>
+                            
                     <li> <a asp-controller= "category" asp-action="list">Category List</a>    </li>
                     <li>  <a asp-controller="category" asp-action="add"> add Category</a>  </li>
                     <li> <a asp-controller="Product" asp-action="Index">Product List</a>    </li>

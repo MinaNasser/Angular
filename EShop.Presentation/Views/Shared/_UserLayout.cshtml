@@ -17,6 +17,7 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="home" asp-action="privacy">Pricavy</a>
                     </li>
+                    @* @if(User.Claims.FirstOrDefault(c=>c.Type ==  )) *@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="category" asp-action="list">Dashboard</a>
                     </li>

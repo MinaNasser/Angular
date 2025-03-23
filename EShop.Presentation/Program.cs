@@ -21,6 +21,8 @@ builder.Services.AddIdentity<User, IdentityRole>()
 builder.Services.AddScoped(typeof(ProductManager));
 builder.Services.AddScoped(typeof(CategoryManager)); 
 builder.Services.AddScoped(typeof(AccountManager));
+builder.Services.AddScoped(typeof(RoleManager));
+
 #endregion
 
 
@@ -30,6 +32,11 @@ var app = builder.Build();
 app.UseRouting();
 
 app.UseStaticFiles();//Force WWWRoot
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name: "default",

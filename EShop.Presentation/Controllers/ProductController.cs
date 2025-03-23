@@ -1,10 +1,13 @@
 ﻿using EShop.Manegers;
 using EShop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace EShop.Presentation.Controllers
 {
+
     public class ProductController : Controller
     {
         private ProductManager ProductManager;
@@ -28,6 +31,7 @@ namespace EShop.Presentation.Controllers
             return View(list);
         }
 
+        [Authorize (Roles ="Vendor,Admin")]
         [HttpGet]
         public IActionResult Add()
         {
@@ -40,6 +44,8 @@ namespace EShop.Presentation.Controllers
             //no cast
             return View();
         }
+        [Authorize(Roles = "Vendor,Admin")]
+
         [HttpPost]
         public IActionResult Add(AddProductViewModel viewModel)
         {
@@ -62,7 +68,7 @@ namespace EShop.Presentation.Controllers
                     viewModel.Paths.Add($"/Images/Products/{file.FileName}");
 
                 }
-
+                viewModel.VendorId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 ProductManager.Add(viewModel.ToModel());
 
                 return RedirectToAction("index");
