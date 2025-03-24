@@ -37,7 +37,7 @@ namespace EShop.ViewModels
 
 
         //no requied to be Displayed
-        public string VendorId { get; set; } = "123";
+        public string VendorId { get; set; } = "";
         public bool IsDelated { get; set; } = false;
         //[NotMapped]
         public DateTime CreatedAt { get; set; } = DateTime.Now;

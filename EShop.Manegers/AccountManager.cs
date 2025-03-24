@@ -11,6 +11,7 @@ namespace EShop.Manegers
     {
         private UserManager<User> UserManager;
         private SignInManager<User> signInManager;
+
         public AccountManager(
             EShopContext context,
             UserManager<User> _UserManager,
@@ -33,14 +34,7 @@ namespace EShop.Manegers
                 User user =await UserManager.FindByNameAsync(userRegister.UserName);
 
                 res =  await  UserManager.AddToRoleAsync(user, userRegister.Role);
-
-                if(userRegister.Role == "Vendor")
-                {
-                    //
-                }else if (userRegister.Role == "Client")
-                {
-                    //
-                }
+                return res;
             }
             return res;
         }
@@ -54,5 +48,16 @@ namespace EShop.Manegers
             else
              return await  signInManager.PasswordSignInAsync(vmodel.Method, vmodel.Password, true, true);
         }
+
+        public async Task<User> FindByUserName (string userName)
+        {
+            return await UserManager.FindByNameAsync(userName);
+        }
+
+        public async Task Signout()
+        {
+             await signInManager.SignOutAsync();
+        }
+
     }
 }

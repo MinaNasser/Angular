@@ -1,8 +1,9 @@
 ﻿<html>
-    <head>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    </head>
-    <body>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @RenderSection("styles", false)
+</head>
+<body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -17,13 +18,38 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="home" asp-action="privacy">Pricavy</a>
                     </li>
-                    @* @if(User.Claims.FirstOrDefault(c=>c.Type ==  )) *@
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="category" asp-action="list">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="account" asp-action="register">Join Us</a>
-                    </li>
+
+                    @if (User.Claims.Any())
+                    {
+                        @if( User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.Role ).Value == "Client")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="product" asp-action="index">Products</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="product" asp-action="VendorList">Dashboard</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="signout">Sign Out</a>
+                        </li>
+                    }
+                    else
+                    {
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="register">Join Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="login">Login</a>
+                        </li>
+                    }
+
+
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,6 +69,7 @@
         </div>
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", false)
     </body>
 
 </html>

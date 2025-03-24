@@ -1,19 +1,31 @@
-﻿@{
-    Layout = "_AdminLayout";
+﻿
+@{
+    string userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+    string path = "";
+    if(userRole == "Client"){
+        Layout = "_UserLayout";
+        path = "index";
+    }
+    else
+    {
+        Layout = "_AdminLayout";
+        path = "VendorList";
+    }
     var list = ViewData["CategoriesList"] as List<SelectListItem>;
     bool canNext = !(Model.PageNumber * Model.PageSize < Model.Total);
     bool canBack = Model.PageNumber <= 1;
 
     int PageCountabdelkhalk = (int)Math.Ceiling ((double)Model.Total / Model.PageSize) ;
     int PageCountosama = (int)(Model.Total / Model.PageSize) + (int)(Model.Total % Model.PageSize);
-
+    
 
 }
 @model PaginationViewModel<ProductDetailsViewModel>
 
 <h1>Product List</h1>
 
-<form  class="row g-3" asp-action="index" asp-controller="Product" method="get">
+
+<form  class="row g-3" asp-action="@path" asp-controller="Product" method="get">
 
     <div class="col-md-4">
         <label >Search Text</label>

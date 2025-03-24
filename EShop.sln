@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.ViewModels", "EShop.V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Manegers", "EShop.Manegers\EShop.Manegers.csproj", "{DB50A0B8-D555-4710-88F9-2ED1FC6D6E14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Services", "EShop.Services\EShop.Services.csproj", "{81F77EE1-D6AF-4639-90DF-13A15E5CA0FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DB50A0B8-D555-4710-88F9-2ED1FC6D6E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB50A0B8-D555-4710-88F9-2ED1FC6D6E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB50A0B8-D555-4710-88F9-2ED1FC6D6E14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F77EE1-D6AF-4639-90DF-13A15E5CA0FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F77EE1-D6AF-4639-90DF-13A15E5CA0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F77EE1-D6AF-4639-90DF-13A15E5CA0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F77EE1-D6AF-4639-90DF-13A15E5CA0FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
