@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 #region DI Containers
 
 builder.Services.AddControllersWithViews();
+//builder.Services.AddControllers();
 
 builder.Services.AddDbContext<EShopContext>(i =>
 i.UseLazyLoadingProxies()
@@ -45,7 +46,11 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=index}"); 
+    pattern: "{controller=Home}/{action=index}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{area=admin}/{controller=Home}/{action=Index}");
 #endregion
 
 app.Run();

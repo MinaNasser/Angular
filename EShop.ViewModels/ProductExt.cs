@@ -30,6 +30,7 @@ namespace EShop.ViewModels
         {
             return new ProductDetailsViewModel
             {
+                Id= viewModel.Id,
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 CategoryName = viewModel.Category.Name,

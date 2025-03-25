@@ -4,64 +4,51 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace EShop.Presentation.Controllers
+namespace EShop.API.Controllers
 {
-
-    public class ProductController : Controller
+    [ApiController]
+    [Route("api/{Controller}")]
+    public class ProductController : ControllerBase
     {
+
         private ProductManager ProductManager;
-        private CategoryManager CategoryManager;
-        public ProductController(ProductManager pmanager,CategoryManager cmanager )
+        public ProductController(ProductManager pmanager)
         {
             ProductManager = pmanager;
-            CategoryManager = cmanager;
         }
 
         //    .... /product/index
         //    .... /product
+        [Route("index")]
         public IActionResult Index(string searchText = "", decimal price = 0,
             int categoryId = 0, string vendorId = "", int pageNumber = 1,
-            int pageSize = 3)
+            int pageSize = 5)
         {
-            ViewData["CategoriesList"] = GetCategories();
 
-            var list = ProductManager.Search(categoryId:categoryId, vendorId:vendorId,
-                searchText: searchText,price:price,pageNumber:pageNumber,pageSize:pageSize);
-            return View(list);
+            var list = ProductManager.Search(categoryId: categoryId, vendorId: vendorId,
+                searchText: searchText, price: price, pageNumber: pageNumber, pageSize: pageSize);
+            return Ok(list);
         }
 
-        [Authorize(Roles ="Vendor")]
+        [Authorize(Roles = "Vendor")]
+        [Route("VendorList")]
         public IActionResult VendorList(string searchText = "", decimal price = 0,
-           int categoryId = 0, int pageNumber = 1,
-           int pageSize = 3)
+            int categoryId = 0, int pageNumber = 1,
+            int pageSize = 3)
         {
 
-            ViewData["CategoriesList"] = GetCategories();
             var myID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var list = ProductManager.Search(categoryId: categoryId, vendorId: myID,
                 searchText: searchText, price: price, pageNumber: pageNumber, pageSize: pageSize);
-            return View("index", list);
+            return Ok(list);
         }
 
 
-        [Authorize (Roles ="Vendor,Admin")]
-        [HttpGet]
-        public IActionResult Add()
-        {
-
-
-            ViewData["CategoriesList"] = GetCategories();
-            //cast  
-
-            ViewBag.Title = "Welcome";
-            //no cast
-            return View();
-        }
         [Authorize(Roles = "Vendor,Admin")]
-
+        
         [HttpPost]
+        [Route("add")]
         public async Task<IActionResult> Add(AddProductViewModel viewModel)
         {
             viewModel.VendorId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
@@ -73,7 +60,7 @@ namespace EShop.Presentation.Controllers
                 foreach (var file in viewModel.Attachments)
                 {
                     FileStream fileStream = new FileStream(
-                            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images" ,"Products", file.FileName),
+                            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Products", file.FileName),
                             FileMode.Create);
 
                     file.CopyTo(fileStream);
@@ -88,16 +75,11 @@ namespace EShop.Presentation.Controllers
                 ProductManager.Add(viewModel.ToModel());
 
 
-                return RedirectToAction("index");
+                return Ok(new {massage= "Successfull added"});
             }
 
-            ViewData["CategoriesList"] = GetCategories();
-            return View();
-        }
-        private List<SelectListItem> GetCategories()
-        {
-            return CategoryManager.Get()
-    .Select(cat => new SelectListItem(cat.Name, cat.Id.ToString())).ToList();
+            return Ok(new { massage = "Data is invaild" });
         }
     }
 }
+
