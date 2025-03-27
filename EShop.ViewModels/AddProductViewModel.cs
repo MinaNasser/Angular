@@ -14,8 +14,8 @@ namespace EShop.ViewModels
 
 
         //[Required(ErrorMessage = "Please Provide valid Product Description")]
-        //[StringLength(1000, MinimumLength = 10, ErrorMessage = "Product Description must contain at least 10 letter and max 1000 letter")]
-        [MultiLine]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "Product Description must contain at least 10 letter and max 1000 letter")]
+        //[MultiLine]
         //[DataType(dataType:DataType.MultilineText)]
         public string Description { get; set; }
 

@@ -9,6 +9,7 @@ namespace EShop.API.Controllers
 {
     [ApiController]
     [Route("api/{Controller}")]
+    //[GenaralExceptionFilter]
     public class ProductController : ControllerBase
     {
 
@@ -18,8 +19,7 @@ namespace EShop.API.Controllers
             ProductManager = pmanager;
         }
 
-        //    .... /product/index
-        //    .... /product
+        //    .... api/product/index
         [Route("index")]
         public IActionResult Index(string searchText = "", decimal price = 0,
             int categoryId = 0, string vendorId = "", int pageNumber = 1,
@@ -46,9 +46,10 @@ namespace EShop.API.Controllers
 
 
         [Authorize(Roles = "Vendor,Admin")]
-        
-        [HttpPost]
-        [Route("add")]
+        [Route ("add")]
+        [HttpPost ("post")]
+        //.../api/product/add
+        //.../api/product/post
         public async Task<IActionResult> Add(AddProductViewModel viewModel)
         {
             viewModel.VendorId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
@@ -79,6 +80,28 @@ namespace EShop.API.Controllers
             }
 
             return Ok(new { massage = "Data is invaild" });
+        }
+
+
+        [HttpGet("Details/{id}")]
+        //[Route("GetById/{id}")]
+        public IActionResult GetById(int id)
+        {
+           var product = ProductManager.GetList(i => i.Id == id).FirstOrDefault();
+            ProductDetailsViewModel reponse = new ProductDetailsViewModel();
+            if (product != null)
+            {
+                reponse = product.ToDetailsVModel();
+            }
+            return new JsonResult(
+                new APIResault<ProductDetailsViewModel>
+                {
+                    Status = 200,
+                    Success = product == null ? false : true,
+                    Massage = product == null ? "Sorry There is no Product with this Id" : "Here Your Product",
+                    Data = reponse
+                }
+            );
         }
     }
 }

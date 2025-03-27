@@ -14,7 +14,7 @@ namespace EShop.ViewModels
             {
                 return new ValidationResult("Please Provide valid Product Description");
             }
-            if(val.Split(Environment.NewLine).Length < 2)
+            if(val.Split(Environment.NewLine).Length < 2 )
             {
                 return new ValidationResult("Please Provide Product Description With Multi Line");
             }

@@ -1,5 +1,6 @@
 using EF_Core;
 using EF_Core.Models;
+using EShop.API;
 using EShop.Manegers;
 using EShop.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,7 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(i =>
+{
+    i.Filters.Add<GenaralExceptionFilter>();
+});
+
 builder.Services.AddDbContext<EShopContext>
     (i=>i.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -43,14 +48,20 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
+builder.Services.AddCors(option => option.AddDefaultPolicy
+    (
+        i=>i.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()
+    )
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-//app.UseAuthorization();
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(
