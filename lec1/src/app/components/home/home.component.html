@@ -1,1 +1,7 @@
-<p>home works!</p>
+<h1>{{myStore.name}}</h1>
+
+<img [src]="myStore.imgUrl" alt="" class="w-25 h-25 border border-dark rounded-circle">
+
+<ul>
+    <li *ngFor="let brand of myStore.brand">{{brand}}</li>
+</ul>
