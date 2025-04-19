@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<!-- read (View it)-->
+<!-- intepolation -->
+<h1>{{title}}</h1>
+<h1>text : {{text}}</h1>
+
+<!-- attrbuite binging -->
+<img [src]="imgurl">
+
+<hr>
+<!-- write formsmodule  -->
+<!-- banana in box -->
+<input type="text" [(ngModel)]="text">
+@if (text.length<3) {
+ <span>Enter valid text</span>
+}   
+<!-- <span *ngIf="text.length<3">Enter valid text</span> -->
+
+<!-- event binding -->
+<input value="add task" type="button" (click)="add()">
+
+
+<hr>
+
+@for (item of list; track $index) {
+    <div>{{item}}</div>
+}
+
+<!-- templete #---- -->
+<!-- <input type="text" [value]="title" #temp (keyup.enter)="test(temp.value)">
+<input type="button" (click)="test(temp.value)"> -->
+
