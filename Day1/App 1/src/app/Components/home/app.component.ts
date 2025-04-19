@@ -47,8 +47,6 @@ export class AppComponent {
   updateItem(_t16: string) {
     const index = this.List.indexOf(_t16);
     if (index > -1) {
-      this.text = _t16;
-      this.List.splice(index, 1);
       
       this.List[index] = "Updated Item";
       }
