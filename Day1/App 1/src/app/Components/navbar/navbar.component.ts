@@ -8,6 +8,7 @@ import { Component } from "@angular/core";
     styles:`
     .navbar{
         background-color: blue;
+        color:white;
         padding:20px;
     }`,
     standalone:true

@@ -10,14 +10,62 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css',
   imports:[
     NavbarComponent,
-    FormsModule
+    FormsModule 
   ]
 })
 
 
 
 export class AppComponent {
-  text = '';
+
+
+  text= "";
+  title = "بسم الله";
+  imgUrl = "./favicon.ico";
+  List: string[] = [];
+  test(val:string){
+    alert(val)
+  }
+
+  addItem(){
+    console.log("button clicked");
+    
+    if(this.text.length<3){
+      alert("Invalid Text")
+    }
+    else{
+      this.List.push(this.text)
+      this.text = "";
+    }
+  }
+  deleteItem(_t16: string) {
+    const index = this.List.indexOf(_t16);
+    if (index > -1) {
+      this.List.splice(index, 1);
+    }
+  }
+  updateItem(_t16: string) {
+    const index = this.List.indexOf(_t16);
+    if (index > -1) {
+      this.List[index] = "Updated Item";
+      }
+      
+    }
+    editItem(_t16: string) {
+      const index = this.List.indexOf(_t16);
+      if (index > -1) {
+        this.List[index] = "Edited Item";
+      }
+    }
+
+
+
+}
+
+
+/**
+ * 
+ * text = '';
   title= "بسم الله"
   imgurl = "./favicon.ico"
   list:string[] = []
@@ -36,6 +84,4 @@ export class AppComponent {
       this.list.push(this.text)
     }
   }
-
-
-}
+ */
