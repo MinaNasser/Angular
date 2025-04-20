@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductComponent {
   products: iProduct[];
+  totalOrderPrice: number = 0;
   constructor() {
     this.products = [
       { id: 1, name: 'Laptop', price: 100, quantity: 10, imgUrl: 'https://picsum.photos/200/300', categoryId: 1 },
@@ -25,5 +26,10 @@ export class ProductComponent {
       { id: 7, name: 'Keyboard', price: 600, quantity: 60, imgUrl: 'https://picsum.photos/200/306', categoryId: 4 },
       { id: 8, name: 'Headphones', price: 700, quantity: 70, imgUrl: 'https://picsum.photos/200/307', categoryId: 4 },
     ];
+  }
+  Buy(count: string, price: number) {
+    // Convert the count to a number and check if it's a valid number
+    const countNumber = parseInt(count, 10);
+    this.totalOrderPrice += countNumber * price;
   }
 }

@@ -1,3 +1,4 @@
+<h1>Total Order Price : {{totalOrderPrice}}</h1>
 <div class="row row-cols-1 row-cols-md-4  g-4">
     <div class="col" *ngFor="let prd of products">
       <div class="card">
@@ -6,8 +7,10 @@
           <h5 class="card-title">{{prd.name}}</h5>
           <p class="card-text">Price : {{prd.price}}</p>
           <p class="cared-text">Quantity : {{prd.quantity}} </p>
+          <input type="number" #CountInput />
+          <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
         </div>
       </div>
     </div>
   </div>
-  <img src="assets/images/12.jpg" alt="dkhjkhjff">
+  <!-- <img src="assets/images/1.jpg" alt="dkhjkhjff">  -->
