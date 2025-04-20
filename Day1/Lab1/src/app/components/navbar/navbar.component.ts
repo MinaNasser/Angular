@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-navbar',
   standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']  // ✅ صح كده
 })
 export class NavbarComponent {
-
+  bannerImage: string = 'assets/image/banner.png';
 }

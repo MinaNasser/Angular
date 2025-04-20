@@ -1,11 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ProductsComponent } from './components/products/products.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { ProductsComponent } from "./components/products/products.component";
+import { NgModule } from "@angular/core";
 
 @NgModule({
   declarations: [
@@ -15,10 +13,9 @@ import { FooterComponent } from './components/footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
