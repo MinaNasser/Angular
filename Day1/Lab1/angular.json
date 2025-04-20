@@ -32,8 +32,11 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
+        
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/public",
+                "output": "/"
+      
               }
             ],
             "styles": [

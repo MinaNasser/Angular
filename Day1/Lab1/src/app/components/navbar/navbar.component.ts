@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']  // ✅ صح كده
 })
 export class NavbarComponent {
-  bannerImage: string = 'assets/image/banner.png';
+  bannerImage: string = 'Images/banner.png';
 }
+
