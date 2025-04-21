@@ -20,10 +20,10 @@ export class ProductComponent {
   products: iProduct[];
   Categories: iCategory[] ;
   totalOrderPrice: number = 0;
-  selectedCategory: number = 0;
+  selectedCategory: number = 1;
   constructor() {
     this.products = [
-      { id: 1, name: 'Laptop', price: 100, quantity: 10, imgUrl: 'https://picsum.photos/200/300', categoryId: 1 },
+      { id: 1, name: 'Laptop', price: 100, quantity: 0, imgUrl: 'https://picsum.photos/200/300', categoryId: 1 },
       { id: 2, name: 'Laptop Dell', price: 100, quantity: 10, imgUrl: 'https://picsum.photos/200/301', categoryId: 1 },
       { id: 3, name: 'Phone', price: 200, quantity: 20, imgUrl: 'https://picsum.photos/200/302', categoryId: 2 },
       { id: 4, name: 'Tablet', price: 300, quantity: 30, imgUrl: 'https://picsum.photos/200/303', categoryId: 2 },
@@ -46,10 +46,12 @@ export class ProductComponent {
     ];
   }
   Buy(count: string, price: number) {
-    // Convert the count to a number and check if it's a valid number
     const countNumber = parseInt(count, 10);
-    this.totalOrderPrice += countNumber * price;
+    if (!isNaN(countNumber) && countNumber > 0) {
+      this.totalOrderPrice += countNumber * price;
+    }
   }
+  
   Filter() {
     if (this.selectedCategory != 0) {
       return this.products.filter((product) => product.categoryId == this.selectedCategory);

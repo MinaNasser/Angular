@@ -1,17 +1,26 @@
 <h1>Total Order Price : {{totalOrderPrice}}</h1>
 <div class="mb-3">
   <label for="" class="form-label">Category</label>
-  <select class="form-select form-select-lg" name="" id="" [(ngModel)]="selectedCategory" >
-    <option *ngFor="let cat of Categories" value="cat.id">{{cat.name}}</option>
+  <select class="form-select form-select-lg" name="" id="" [(ngModel)]="selectedCategory">
+    <option [value]="0">All Categories</option>
+    <option *ngFor="let cat of Categories" [value]="cat.id">{{ cat.name }}</option>
+
 
   </select>
 </div>
 <!-- <button class="btn btn-primary" (click)="Filter()">Filter</button> -->
 <div class="row row-cols-1 row-cols-md-4  g-4">
-  <div class="col" *ngFor="let prd of products">
+  <!-- [class.d-none]="prd.categoryId!=selectedCategory"] -->
+  <div class="col" *ngFor="let prd of products" 
+  [ngClass]="{ 'd-none': selectedCategory != 0 && prd.categoryId != selectedCategory }"
+
+
+  >
     <div class="card">
-      <img [src]="prd.imgUrl" class="card-img-top w-100 h-25" alt="...">
-      <div class="card-body">
+      <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="150" [style.object-fit]="'cover'" alt="...">
+
+      <div class="card-body" 
+      [ngClass]="{ 'bg-success': prd.quantity > 0, 'bg-danger': prd.quantity == 0 }">
         <h5 class="card-title">{{prd.name}}</h5>
         <p class="card-text">Price : {{prd.price}}</p>
         <p class="cared-text">Quantity : {{prd.quantity}} </p>
