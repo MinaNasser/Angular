@@ -60,4 +60,7 @@ export class ProductComponent {
     }
     return this.products.filter((product) => product.categoryId == this.selectedCategory);
   }
+  trackByFn(  index: number, item: iProduct) {
+    return item.id; // or item.id if you have a unique identifier property
+  }
 }
