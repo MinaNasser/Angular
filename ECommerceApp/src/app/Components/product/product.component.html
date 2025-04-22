@@ -1,4 +1,4 @@
-  <h1>Total Order Price : {{totalOrderPrice}}</h1>
+<h1>Total Order Price : {{totalOrderPrice}}</h1>
 <div class="mb-3">
   <label for="" class="form-label">Category</label>
   <select class="form-select form-select-lg" name="" id="" [(ngModel)]="selectedCategory">
@@ -10,37 +10,76 @@
 <div class="row row-cols-1 row-cols-md-4  g-4">
   <ng-container *ngFor="let prd of products; let i = index;let c= count ; ngForTrackBy: trackByFn">
     <div class="col" *ngIf="prd.quantity!= 0"
+      [ngClass]="{ 'd-none': selectedCategory != 0 && prd.categoryId != selectedCategory }">
+      <div class="card">
+        <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="150" [style.object-fit]="'cover'" alt="...">
+        <div class="card-body" [ngClass]="{ 'bg-success': prd.quantity > 0, 'bg-danger': prd.quantity == 0 }">
+          <h5 class="card-title">{{prd.name}}</h5>
+          <p class="card-text">Price : {{prd.price}}</p>
+          <div [ngSwitch]="prd.quantity">
+            <p class="cared-text" *ngSwitchCase="0">Out of Stock</p>
+            <p class="cared-text" *ngSwitchCase="1">Last Item</p>
+            <p class="cared-text" *ngSwitchCase="2">Last Two Item</p>
+            <p class="cared-text" *ngSwitchDefault>Quantity : {{prd.quantity}} </p>
 
+          </div>
+
+          <!-- <p class="cared-text" *ngIf="prd.quantity!=1;else lastItem" 
+        >Quantity : {{prd.quantity}} </p>
+        <ng-template #lastItem>
+          <p class="cared-text">Quantity : Last Item</p>
+        </ng-template> -->
+          <p class="cared-text">{{c}} </p>
+
+          <input type="number" #CountInput />
+          <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+<div class="m-5 text-center bg-body-secondary fs-3 fw-bold">
+  with for
+</div>
+<div class="row row-cols-1 row-cols-md-4  g-4">
+  @for (prd of products ; track prd.id ; let i =$index ; ) {
+  <div class="col" *ngIf="prd.quantity!= 0"
     [ngClass]="{ 'd-none': selectedCategory != 0 && prd.categoryId != selectedCategory }">
     <div class="card">
       <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="150" [style.object-fit]="'cover'" alt="...">
-      <div class="card-body" 
-      [ngClass]="{ 'bg-success': prd.quantity > 0, 'bg-danger': prd.quantity == 0 }">
+      <div class="card-body" [ngClass]="{ 'bg-success': prd.quantity > 0, 'bg-danger': prd.quantity == 0 }">
         <h5 class="card-title">{{prd.name}}</h5>
-        <p class="card-text" >Price : {{prd.price}}</p>
-        <!-- use ngswitch -->
-         <div [ngSwitch]="prd.quantity">
-           <p class="cared-text" *ngSwitchCase="0">Out of Stock</p>
+        <p class="card-text">Price : {{prd.price}}</p>
+        <div [ngSwitch]="prd.quantity">
+          <p class="cared-text" *ngSwitchCase="0">Out of Stock</p>
           <p class="cared-text" *ngSwitchCase="1">Last Item</p>
           <p class="cared-text" *ngSwitchCase="2">Last Two Item</p>
           <p class="cared-text" *ngSwitchDefault>Quantity : {{prd.quantity}} </p>
 
-         </div>
+        </div>
 
         <!-- <p class="cared-text" *ngIf="prd.quantity!=1;else lastItem" 
         >Quantity : {{prd.quantity}} </p>
         <ng-template #lastItem>
           <p class="cared-text">Quantity : Last Item</p>
         </ng-template> -->
-        <p class="cared-text">{{c}} </p>
+        <!-- <p class="cared-text">{{c}} </p> -->
 
         <input type="number" #CountInput />
         <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
       </div>
     </div>
   </div>
-  </ng-container>
-  
+  }@empty {
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">No Product Found</h5>
+      </div>
+    </div>
+  </div>
+  }
 </div>
 
 
