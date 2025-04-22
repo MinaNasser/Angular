@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightCard]',
@@ -18,13 +18,13 @@ export class HighlightCardDirective {
     element.nativeElement.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
 
   }
-  over() {
+  @HostListener('mouseover') over() {
     this.element.nativeElement.style.backgroundColor = 'blue';
     this.element.nativeElement.style.color = 'white';
     this.element.nativeElement.style.transform = 'scale(1.05)';
     this.element.nativeElement.style.transition = 'all 0.3s ease-in-out';
   }
-  out() {
+  @HostListener('mouseout') out() {
     this.element.nativeElement.style.backgroundColor = 'gray';
     this.element.nativeElement.style.color = 'black';
     this.element.nativeElement.style.transform = 'scale(1)';
