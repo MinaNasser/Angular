@@ -3,13 +3,15 @@ import { iProduct } from '../../Models/iproduct';
 import { CommonModule } from '@angular/common';
 import { iCategory } from '../../Models/icategory';
 import { FormsModule } from '@angular/forms';
+import { HighlightCardDirective } from '../../directives/highlight-card.directive';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HighlightCardDirective,
     
   ],
   templateUrl: './product.component.html',
