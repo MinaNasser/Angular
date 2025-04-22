@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightCard]',
@@ -10,6 +10,7 @@ export class HighlightCardDirective {
   // when the user hovers over them.    
   // The directive can be applied to any element by using the selector [appHighlightCard]
   // element: ElementRef;
+  @Input() externalHighlight : string = 'red';
   constructor(private element: ElementRef) {
     element.nativeElement.style.backgroundColor = 'gray';
     element.nativeElement.style.padding = '10px';
@@ -19,7 +20,7 @@ export class HighlightCardDirective {
 
   }
   @HostListener('mouseover') over() {
-    this.element.nativeElement.style.backgroundColor = 'blue';
+    this.element.nativeElement.style.backgroundColor =this.externalHighlight //'blue';
     this.element.nativeElement.style.color = 'white';
     this.element.nativeElement.style.transform = 'scale(1.05)';
     this.element.nativeElement.style.transition = 'all 0.3s ease-in-out';

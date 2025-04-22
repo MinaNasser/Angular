@@ -47,7 +47,7 @@
 <div class="row row-cols-1 row-cols-md-4  g-4">
   @for (prd of products ; track prd.id ; let i =$index ; ) {
   <div class="col"  > 
-    <div class="card" appHighlightCard>
+    <div class="card" appHighlightCard externalHighlight="pink">
       <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="300" [style.object-fit]="'cover'" alt="...">
       <div class="card-body" >
         <h5 class="card-title">{{prd.name}}</h5>
