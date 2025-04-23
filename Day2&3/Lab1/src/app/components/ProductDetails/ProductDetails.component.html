@@ -1,6 +1,6 @@
 <div class="container mt-4" *ngIf="product; else notFound">
   <div class="card">
-    <img [src]="product.Img" class="card-img-top" [alt]="product.Name">
+    <img [src]="product.Img | CheckImage:'Images/default.jpg'" class="card-img-top" alt="{{ product.Name }}">
     <div class="card-body">
       <h5 class="card-title">{{ product.Name }}</h5>
       <p class="card-text">Description: {{ product.Description }}</p>

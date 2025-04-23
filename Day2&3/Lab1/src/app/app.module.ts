@@ -10,6 +10,8 @@ import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from './app-routing.module';
 
 import { Router, RouterLink, RouterModule } from "@angular/router";
+import { ProductDetailsComponent } from "./components/ProductDetails/ProductDetails.component";
+import { CartComponent } from "./components/Cart/Cart.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { Router, RouterLink, RouterModule } from "@angular/router";
     NavbarComponent,
     ProductsComponent,
     FooterComponent,
+    ProductDetailsComponent,
+    CartComponent,
     
   ],
   imports: [
@@ -28,6 +32,7 @@ import { Router, RouterLink, RouterModule } from "@angular/router";
     RouterModule,
     RouterLink,
     CommonModule,
+
   ],
   exports: [
     CutTextPipe,
