@@ -10,6 +10,10 @@
           <p class="card-text">Quantity: {{ product.Quantity }}</p>
           <!-- add to cart button -->
           <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+          <!-- بدل (click)="viewDetails(product)" -->
+          <a class="btn btn-secondary" [routerLink]="['/products', product.ID]">View Details</a>
+
+
         </div>
       </div>
     </div>

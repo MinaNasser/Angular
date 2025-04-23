@@ -1,0 +1,32 @@
+<div class="container mt-4" *ngIf="product; else notFound">
+  <div class="card">
+    <img [src]="product.Img" class="card-img-top" [alt]="product.Name">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.Name }}</h5>
+      <p class="card-text">Description: {{ product.Description }}</p>
+      <p class="card-text">Price: {{ product.Price | currency }}</p>
+      <p class="card-text">Quantity: {{ product.Quantity }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="error-template text-center">
+          <h1>Oops!</h1>
+          <h2>404 Not Found</h2>
+          <div class="error-details">
+            Sorry, an error has occurred, Requested page not found!
+          </div>
+          <div class="error-actions mt-3">
+            <a routerLink="/" class="btn btn-primary btn-lg">
+              <i class="bi bi-house-door-fill"></i> Take Me Home
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

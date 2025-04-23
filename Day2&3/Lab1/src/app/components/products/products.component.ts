@@ -19,5 +19,8 @@ export class ProductsComponent {
   addToCart(product: IProduct) {
     alert(`${product.Name} added to cart`);
   }
+  viewDetails(productId: number) {
+    alert(`View details for product ID: ${productId}`);
+  }
 }
 
