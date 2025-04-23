@@ -51,7 +51,7 @@
       <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="300" [style.object-fit]="'cover'" alt="...">
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{prd.name}}</h5>
-        <p class="card-text">Price : {{prd.price | currency}}</p>
+        <p class="card-text">Price : {{prd.price | currency:'EUR':'code' }}</p>
 
         <div [ngSwitch]="prd.quantity" class="mb-2">
           <p class="card-text" *ngSwitchCase="0">Out of Stock</p>
@@ -79,5 +79,5 @@
   }
 </div>
 
-
+<h2>Date : {{ MyDate | date:'shortDate'}} </h2>
 <!-- <img src="assets/images/1.jpg" alt="dkhjkhjff">  -->

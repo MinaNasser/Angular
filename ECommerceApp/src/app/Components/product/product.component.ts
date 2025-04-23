@@ -23,6 +23,7 @@ export class ProductComponent {
   Categories: iCategory[] ;
   totalOrderPrice: number = 0;
   selectedCategory: number = 1;
+  MyDate: Date = new Date();
   constructor() {
     this.products = [
       { id: 1, name: 'Laptop', price: 100, quantity: 0, imgUrl: 'https://picsum.photos/200/300', categoryId: 1 },
