@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { iCategory } from '../../Models/icategory';
 import { FormsModule } from '@angular/forms';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
+import { SquarePipe } from '../../pipe/square.pipe';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +13,7 @@ import { HighlightCardDirective } from '../../directives/highlight-card.directiv
     CommonModule,
     FormsModule,
     HighlightCardDirective,
-    
+    SquarePipe
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
@@ -24,11 +25,12 @@ export class ProductComponent {
   totalOrderPrice: number = 0;
   selectedCategory: number = 1;
   MyDate: Date = new Date();
+  MyNumber: number = 2;
   constructor() {
     this.products = [
       { id: 1, name: 'Laptop', price: 100, quantity: 0, imgUrl: 'https://picsum.photos/200/300', categoryId: 1 },
-      { id: 2, name: 'Laptop Dell', price: 100, quantity: 10, imgUrl: 'https://picsum.photos/200/301', categoryId: 1 },
-      { id: 3, name: 'Phone', price: 200, quantity: 20, imgUrl: 'https://picsum.photos/200/302', categoryId: 2 },
+      { id: 2, name: 'Laptop Dell', price: 100, quantity: 1, imgUrl: 'https://picsum.photos/200/301', categoryId: 1 },
+      { id: 3, name: 'Phone', price: 200, quantity: 2, imgUrl: 'https://picsum.photos/200/302', categoryId: 2 },
       { id: 4, name: 'Tablet', price: 300, quantity: 30, imgUrl: 'https://picsum.photos/200/303', categoryId: 2 },
       { id: 5, name: 'Monitor', price: 400, quantity: 40, imgUrl: 'https://picsum.photos/200/304', categoryId: 4 },
       { id: 6, name: 'Mouse', price: 500, quantity: 50, imgUrl: 'https://picsum.photos/200/305', categoryId: 4 },

@@ -51,16 +51,17 @@
       <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="300" [style.object-fit]="'cover'" alt="...">
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{prd.name}}</h5>
-        <p class="card-text">Price : {{prd.price | currency:'EUR':'code' }}</p>
+        <p class="card-text">Price : {{prd.price | currency:'EUR': 'symbol' }}</p>
 
         <div [ngSwitch]="prd.quantity" class="mb-2">
-          <p class="card-text" *ngSwitchCase="0">Out of Stock</p>
+          <p class="card-text  text-danger text-center mark  fs-4 fw-bold border-bottom" *ngSwitchCase="0" >Out of Stock</p>
           <p class="card-text" *ngSwitchCase="1">Last Item</p>
           <p class="card-text" *ngSwitchCase="2">Last Two Item</p>
           <p class="card-text" *ngSwitchDefault>Quantity : {{prd.quantity}}</p>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mt-auto ">
+        <div class="d-flex justify-content-between align-items-center mt-auto " 
+          [ngClass]="{ 'd-none': prd.quantity == 0 }">
           <input type="number" #CountInput class="form-control me-2" placeholder="Quantity" />
           <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
         </div>
@@ -80,4 +81,7 @@
 </div>
 
 <h2>Date : {{ MyDate | date:'shortDate'}} </h2>
+<h2>Time : {{ MyDate | date:'shortTime'}} </h2>
+<h2>Date : {{ MyDate | date:'short'}} </h2>
+<h2>Number : {{ MyNumber | square:5}} = 2^5 </h2>
 <!-- <img src="assets/images/1.jpg" alt="dkhjkhjff">  -->
