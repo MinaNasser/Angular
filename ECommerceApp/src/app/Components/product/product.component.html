@@ -29,7 +29,7 @@
         <ng-template #lastItem>
           <p class="cared-text">Quantity : Last Item</p>
         </ng-template> -->
-          <!-- <p class="cared-text">{{c}} </p>
+<!-- <p class="cared-text">{{c}} </p>
 
           <input type="number" #CountInput />
           <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
@@ -46,22 +46,26 @@
 
 <div class="row row-cols-1 row-cols-md-4  g-4">
   @for (prd of products ; track prd.id ; let i =$index ; ) {
-  <div class="col"  > 
-    <div class="card" appHighlightCard externalHighlight="pink">
+  <div class="col">
+    <div class="card" appHighlightCard="gray" externalColor="pink">
       <img [src]="prd.imgUrl" class="card-img-top" [style.height.px]="300" [style.object-fit]="'cover'" alt="...">
-      <div class="card-body" >
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{prd.name}}</h5>
         <p class="card-text">Price : {{prd.price}}</p>
-        <div [ngSwitch]="prd.quantity">
-          <p class="cared-text" *ngSwitchCase="0">Out of Stock</p>
-          <p class="cared-text" *ngSwitchCase="1">Last Item</p>
-          <p class="cared-text" *ngSwitchCase="2">Last Two Item</p>
-          <p class="cared-text" *ngSwitchDefault>Quantity : {{prd.quantity}} </p>
 
+        <div [ngSwitch]="prd.quantity" class="mb-2">
+          <p class="card-text" *ngSwitchCase="0">Out of Stock</p>
+          <p class="card-text" *ngSwitchCase="1">Last Item</p>
+          <p class="card-text" *ngSwitchCase="2">Last Two Item</p>
+          <p class="card-text" *ngSwitchDefault>Quantity : {{prd.quantity}}</p>
         </div>
-        <input type="number" #CountInput />
-        <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
+
+        <div class="d-flex justify-content-between align-items-center mt-auto">
+          <input type="number" #CountInput class="form-control me-2" style="width: 70px;" />
+          <button class="btn btn-success">Buy</button>
+        </div>
       </div>
+
     </div>
   </div>
   }@empty {
