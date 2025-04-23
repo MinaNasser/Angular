@@ -5,6 +5,11 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ProductsComponent } from "./components/products/products.component";
 import { NgModule } from "@angular/core";
 import { CheckImagePipe } from "../Pipes/CheckImage.pipe";
+import { CutTextPipe } from "../Pipes/CutText.pipe";
+import { CommonModule } from "@angular/common";
+import { AppRoutingModule } from './app-routing.module';
+
+import { Router, RouterLink, RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -12,11 +17,22 @@ import { CheckImagePipe } from "../Pipes/CheckImage.pipe";
     NavbarComponent,
     ProductsComponent,
     FooterComponent,
+    
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    CheckImagePipe
-],
+    CheckImagePipe,
+    CutTextPipe,
+    CommonModule,
+    RouterModule,
+    RouterLink,
+    CommonModule,
+  ],
+  exports: [
+    CutTextPipe,
+    CheckImagePipe,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

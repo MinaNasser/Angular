@@ -2,9 +2,10 @@
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let product of ProductList">
       <div class="card h-100">
-        <img [src]="product.Img | CheckImage:'assets/images/default.jpg'" class="card-img-top" alt="{{ product.Name }}">
+        <img [src]="product.Img | CheckImage:'Images/default.jpg'" class="card-img-top" alt="{{ product.Name }}">
         <div class="card-body">
           <h5 class="card-title">{{ product.Name }}</h5>
+          <p class="card-text">Description: {{ product.Description | CutText:20}}</p>
           <p class="card-text">Price: {{ product.Price | currency }}</p>
           <p class="card-text">Quantity: {{ product.Quantity }}</p>
           <!-- add to cart button -->
