@@ -55,8 +55,8 @@
 
         <div [ngSwitch]="prd.quantity" class="mb-2">
           <p class="card-text  text-danger text-center mark  fs-4 fw-bold border-bottom" *ngSwitchCase="0" >Out of Stock</p>
-          <p class="card-text" *ngSwitchCase="1">Last Item</p>
-          <p class="card-text" *ngSwitchCase="2">Last Two Item</p>
+          <p class="card-text text-success mark fs-4 fw-bold text-center" *ngSwitchCase="1">Last Item</p>
+          <p class="card-text text-success mark fs-4 fw-bold text-center" *ngSwitchCase="2">Last Two Item</p>
           <p class="card-text" *ngSwitchDefault>Quantity : {{prd.quantity}}</p>
         </div>
 
