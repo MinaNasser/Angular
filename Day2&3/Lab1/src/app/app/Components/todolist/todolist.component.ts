@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { IToDoItem } from '../../../Models/todo';
 
+
 //decerator D P
 @Component({
   selector: 'app-root',
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.css',
+  standalone: false,
 })
 
 

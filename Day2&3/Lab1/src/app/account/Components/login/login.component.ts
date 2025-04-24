@@ -1,35 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { IUserLogin } from '../../../Models/account';
-import { AccountService } from '../../../Services/Account.service';  // ✅ تأكد من اسم الملف الصغير
+import { Component } from '@angular/core';
+import { AccountService } from '../../../Services/Account.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  standalone: false,
 })
-export class LoginComponent implements OnInit {
-
-  user: IUserLogin = {
-    Method: '',
-    Password: ''
-  };
-
-  resultMessage: string = '';
+export class LoginComponent {
+  method: string = ''; // تم تعديل "username" إلى "method"
+  password: string = '';
+  message: string = '';
 
   constructor(private accountService: AccountService) {}
 
-  ngOnInit() {}
-
-  loginUser() {
-    this.accountService.Login(this.user.Method, this.user.Password).subscribe({
-      next: (res) => {
-        this.resultMessage = res;
-        console.log("Login Response:", res);
+  login() {
+    this.accountService.Login(this.method, this.password).subscribe(
+      (response) => {
+        if (response.Status === 200) {
+          this.message = 'Login Success!';
+          localStorage.setItem('authToken', response.Token); // تخزين الـ Token في localStorage
+          console.log('Role:', response.Role);
+        } else {
+          this.message = response.Massage; // عرض الرسالة من الـ API
+        }
       },
-      error: (err) => {
-        this.resultMessage = 'An error occurred';
-        console.error("Login Error:", err);
+      (error) => {
+        this.message = 'An error occurred during login.';
       }
-    });
+    );
   }
 }

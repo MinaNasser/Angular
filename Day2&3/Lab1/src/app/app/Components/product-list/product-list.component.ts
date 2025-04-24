@@ -1,51 +1,39 @@
-import { Component } from '@angular/core';
-
-import { ICategory } from '../../../Models/Category';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../Services/Product.Service';
-import { ProductsFromAPIService } from '../../../Services/ProductsFromAPI.service';
 import { IProduct } from '../../../Models/Iproduct';
+import { ICategory } from '../../../Models/Category';
 import { CategoryService } from '../../../Services/Category.service';
 
 @Component({
   selector: 'app-product-list',
+  standalone: false,
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+  Products: IProduct[] = [];  // قائمة المنتجات
+  selectedCatagory: number = 0;  // الفئة المحددة
+  categories:ICategory[] = [];  // قائمة الفئات
 
-  // ProductController > index
-  // ProductController > add
-  // cartController > add NO UI
+  constructor(private productsrv: ProductService , private CategorySer:CategoryService) {}
 
-  selectedCatagory:number=0;
+  ngOnInit(): void {
+    // يتم تحميل المنتجات عند بداية تحميل الـ Component
+    this.loadProducts();
+  }
 
-  Products:Array<IProduct> = []
-
-  Categories : Array<ICategory>
-
-
-  constructor(
-    private productsrv:ProductService,
-    private productAPI:ProductsFromAPIService
-    ,private CategoryService:CategoryService
-  ){
-    this.Categories = this.CategoryService.GetAllCategories();
-
-    this.productAPI.getAll().subscribe({
-      next:(res)=>{
-        this.Products = res.data
+  loadProducts() {
+    this.productsrv.FilterProductByCategory(this.selectedCatagory).subscribe({
+      next: (data) => {
+        this.Products = data;  // تعيين المنتجات بعد الفلترة
       },
-      error:(err)=>{
-        console.log(err);
-        
+      error: (err) => {
+        console.error("Error fetching products:", err);
       }
-    })
+    });
   }
-
-  filter(){
-    this.Products = this.productsrv.FilterProductByCatagory(this.selectedCatagory)
+  filter() {
+    // عند اختيار فئة جديدة، يتم تحميل المنتجات مرة أخرى
+    this.loadProducts();
   }
-
-
-  
 }

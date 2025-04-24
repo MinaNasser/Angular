@@ -11,10 +11,13 @@ import { AppRouts } from './app.route';
 import { InitComponent } from './Components/init/init.component';
 import { RouterModule } from '@angular/router';
 
-import { ProductDetailsComponent } from './Components/product-Details/product-Details.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MoneyPipe } from '../Pipes/money.pipe';
 import { NotFoundComponent } from './Components/NotFound/NotFound.component';
+import { CheckImagePipe } from '../Pipes/CheckImage.pipe';
+import { CutTextPipe } from '../Pipes/CutText.pipe';
+import { ProductDetailsComponent } from './Components/ProductDetails/ProductDetails.component';
+
 
 
 @NgModule({
@@ -24,11 +27,13 @@ import { NotFoundComponent } from './Components/NotFound/NotFound.component';
     FooterComponent,
     todolistComponent,
     ProductListComponent,
+    ProductDetailsComponent,
     ProductCardComponent,
-    MoneyPipe,
     InitComponent,
     NotFoundComponent,
-    ProductDetailsComponent
+    CheckImagePipe,
+    CutTextPipe,
+    MoneyPipe,
   ],
   imports: [
     CommonModule,
@@ -36,6 +41,7 @@ import { NotFoundComponent } from './Components/NotFound/NotFound.component';
     BrowserModule,
     RouterModule.forRoot(AppRouts)
   ],
+
   bootstrap:[InitComponent],
   // exports:[],
   providers:[

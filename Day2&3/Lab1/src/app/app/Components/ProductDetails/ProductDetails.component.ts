@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from '../../Models/Iproduct';
-import { ProductService } from '../../Services/Product.service';
+import { ProductService } from '../../../Services/Product.Service';
+import { IProduct } from '../../../Models/Iproduct';
 
 @Component({
   selector: 'app-ProductDetails',
-  standalone:false,
+  standalone: false,
   templateUrl: './ProductDetails.component.html',
   styleUrls: ['./ProductDetails.component.css']
 })
@@ -17,6 +17,15 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = this.productService.GetProductById(this.productId);
+    this.productService.GetProductById(this.productId).subscribe({
+      next: (data) => {
+        this.product = data;
+      },
+      error: (err) => {
+        console.error("Error fetching product:", err);
+        // من الأفضل إضافة حالة لإظهار رسالة للمستخدم هنا
+      }
+    });
   }
+  
 }

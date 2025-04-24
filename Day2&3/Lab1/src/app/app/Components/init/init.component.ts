@@ -6,6 +6,8 @@ import { FooterComponent } from "../footer/footer.component";
   selector: 'app-init',
   templateUrl: './init.component.html',
   styleUrls: ['./init.component.css'],
+  standalone: false,
+
 })
 export class InitComponent implements OnInit {
 

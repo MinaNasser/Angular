@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AccountService {
-  constructor() { }
 
-  Login(method: string, password: string): Observable<string> {
-    if ((method === "email" || method === "phone") && password === "123456") {
-      return of("Login Success");
-    }
-    return of("Login Failed");
+  private apiUrl = 'http://localhost:5094/api/account'; // API URL الخاص بـ ASP.NET Core
+
+  constructor(private http: HttpClient) { }
+
+  // تسجيل الدخول
+  Login(emailOrUsername: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { Username: emailOrUsername, Password: password });
   }
 
-  Register(user: any): Observable<string> {
-    if ((user.Method === "email" || user.Method === "phone") && user.Password === "123456") {
-      return of("Register Success");
-    }
-    return of("Register Failed");
+  // التسجيل
+  Register(method: string, password: string, user: any): Observable<any> {
+    const data = { ...user, method, password };  // دمج البيانات
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  Logout(): Observable<string> {
-    return of("Logout Success");
+  // تسجيل الخروج
+  Logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signout`, {});
   }
 }

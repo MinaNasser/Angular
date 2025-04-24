@@ -1,9 +1,9 @@
 <div class="card"  >
-  <img [src]="Product.imgURL" class="card-img-top" [alt]="Product.name">
+  <img [src]="Product.Img" class="card-img-top" [alt]="Product.Name">
   <div class="card-body">
-    <h5 class="card-title">{{Product.name}}</h5>
-    <p class="card-text">{{Product.price |currency:"EGP"}}</p>
-    <a  class="btn btn-success" routerLink="/product/{{Product.id}}">See Details</a>
+    <h5 class="card-title">{{Product.Name}}</h5>
+    <p class="card-text">{{Product.Price|currency:"EGP"}}</p>
+    <a  class="btn btn-success" routerLink="/product/{{Product.ID}}">See Details</a>
     <!-- <a  class="btn btn-success" [routerLink]="['/product',Product.id]">See Details</a> -->
     <a  class="btn btn-primary" (click)="add()">Add to cart</a>
   </div>

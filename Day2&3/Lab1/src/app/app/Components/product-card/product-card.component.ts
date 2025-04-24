@@ -7,6 +7,7 @@ import { CartService } from '../../../Services/CartService.service';
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
+  standalone: false,
 })
 export class ProductCardComponent implements OnInit {
   @Input() Product!:IProduct;

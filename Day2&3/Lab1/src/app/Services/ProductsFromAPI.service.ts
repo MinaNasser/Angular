@@ -12,5 +12,8 @@ constructor(private http:HttpClient) { }
 getAll():Observable<any>{
   return this.http.get("http://localhost:5094/api/product/index")
 }
+getById(id:number):Observable<any>{
+  return this.http.get("http://localhost:5094/api/product/index/"+id)
+}
 
 }

@@ -1,11 +1,12 @@
 <div class="container mt-4" *ngIf="product; else notFound">
   <div class="card">
+    <!-- تحقق من وجود الصورة باستخدام pipe -->
     <img [src]="product.Img | CheckImage:'Images/default.jpg'" class="card-img-top" alt="{{ product.Name }}">
     <div class="card-body">
-      <h5 class="card-title">{{ product.Name }}</h5>
-      <p class="card-text">Description: {{ product.Description }}</p>
-      <p class="card-text">Price: {{ product.Price | currency }}</p>
-      <p class="card-text">Quantity: {{ product.Quantity }}</p>
+      <h5 class="card-title">{{ product?.Name }}</h5>
+      <p class="card-text">Description: {{ product?.Description }}</p>
+      <p class="card-text">Price: {{ product?.Price | currency }}</p>
+      <p class="card-text">Quantity: {{ product?.Quantity }}</p>
     </div>
   </div>
 </div>
@@ -18,7 +19,7 @@
           <h1>Oops!</h1>
           <h2>404 Not Found</h2>
           <div class="error-details">
-            Sorry, an error has occurred, Requested page not found!
+            Sorry, an error has occurred. The requested product was not found!
           </div>
           <div class="error-actions mt-3">
             <a routerLink="/" class="btn btn-primary btn-lg">
