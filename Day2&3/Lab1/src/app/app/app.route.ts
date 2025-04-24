@@ -9,7 +9,7 @@ import { ProductsComponent } from "./Components/products/products.component";
 import { AboutUsComponent } from "./Components/about-us/about-us.component";
 import { ContactUsComponent } from "./Components/contact-us/contact-us.component";
 import { CartComponent } from "./Components/Cart/Cart.component";
-import { NotFoundComponent } from "./Components/notfound/notfound.component";
+import { NotFoundComponent } from "./Components/NotFound/NotFound.component";
 
 
 export let AppRouts:Routes=[

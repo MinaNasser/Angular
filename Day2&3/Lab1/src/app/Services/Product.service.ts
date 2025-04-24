@@ -14,6 +14,10 @@ export class ProductService {
   FilterProductsByName(name: string): IProduct[] {
     return this.Products.filter(product => product.Name.toLowerCase().includes(name.toLowerCase()));
   }
+  // Filter Product By Catagory
+  FilterProductByCatagory(catId: number): IProduct[] {
+    return this.Products.filter(product => product.ID === catId);
+  }
 
 constructor() {
   

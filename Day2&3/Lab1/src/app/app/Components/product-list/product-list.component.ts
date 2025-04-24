@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IProduct } from '../../../Models/Product';
+
 import { ICategory } from '../../../Models/Category';
 import { ProductService } from '../../../Services/Product.Service';
 import { ProductsFromAPIService } from '../../../Services/ProductsFromAPI.service';
+import { IProduct } from '../../../Models/Iproduct';
+import { CategoryService } from '../../../Services/Category.service';
 
 @Component({
   selector: 'app-product-list',
@@ -22,8 +24,12 @@ export class ProductListComponent {
   Categories : Array<ICategory>
 
 
-  constructor(private productsrv:ProductService,private productAPI:ProductsFromAPIService){
-    this.Categories = this.productsrv.GetAllCategories()
+  constructor(
+    private productsrv:ProductService,
+    private productAPI:ProductsFromAPIService
+    ,private CategoryService:CategoryService
+  ){
+    this.Categories = this.CategoryService.GetAllCategories();
 
     this.productAPI.getAll().subscribe({
       next:(res)=>{
@@ -37,7 +43,7 @@ export class ProductListComponent {
   }
 
   filter(){
-    this.Products = this.productsrv.Filter(this.selectedCatagory)
+    this.Products = this.productsrv.FilterProductByCatagory(this.selectedCatagory)
   }
 
 

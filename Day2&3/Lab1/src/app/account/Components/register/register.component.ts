@@ -25,19 +25,16 @@ user:IUserRegister = {
   constructor(
     private accountSrv:AccountService,
   ) { }
-Send(){
-  this.accountSrv.Register(this.user).subscribe(
-    {
-      next:(res)=>{
-        console.log(res);
-        
+  Send() {
+    this.accountSrv.Register(this.user).subscribe({
+      next: (res) => {
+        console.log("Register Response:", res);
       },
-      error:(err)=>{
-        console.log(err);
-        
+      error: (err) => {
+        console.error("Error:", err);
       }
+    });
   }
-)
-}
+  
 
 }

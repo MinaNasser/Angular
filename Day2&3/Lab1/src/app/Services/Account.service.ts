@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class AccountService {
+  constructor() { }
 
-    constructor() { }
-    Login(method: string, password: string): string {
-        if (method == "email" && password == "123456") {
-            return "Login Success";
-        } else if (method == "phone" && password == "123456") {
-            return "Login Success";
-        } else {
-            return "Login Failed";
-        }
+  Login(method: string, password: string): Observable<string> {
+    if ((method === "email" || method === "phone") && password === "123456") {
+      return of("Login Success");
     }
-    Register(method: string, password: string): string {
-        if (method == "email" && password == "123456") {
-            return "Register Success";
-        } else if (method == "phone" && password == "123456") {
-            return "Register Success";
-        } else {
-            return "Register Failed";
-        }
+    return of("Login Failed");
+  }
+
+  Register(user: any): Observable<string> {
+    if ((user.Method === "email" || user.Method === "phone") && user.Password === "123456") {
+      return of("Register Success");
     }
-    Logout(): string {
-        return "Logout Success";
-    }
+    return of("Register Failed");
+  }
+
+  Logout(): Observable<string> {
+    return of("Logout Success");
+  }
 }

@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './Components/product-Details/product-Details.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MoneyPipe } from '../Pipes/money.pipe';
-import { NotFoundComponent } from './Components/notfound/notfound.component';
+import { NotFoundComponent } from './Components/NotFound/NotFound.component';
 
 
 @NgModule({

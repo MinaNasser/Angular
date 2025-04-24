@@ -8,3 +8,9 @@ export interface IUserRegister{
     UserName:string;
     
 }
+
+
+export interface IUserLogin{
+    Method:string;
+    Password:string;
+}
