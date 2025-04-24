@@ -21,10 +21,9 @@ import { SquarePipe } from '../../pipe/square.pipe';
 export class ProductComponent {
 
   products: iProduct[];
-  Categories: iCategory[] ;
+
   FilteredProduct: iProduct[] = [];
   totalOrderPrice: number = 0;
-  selectedCategory: number = 1;
   MyDate: Date = new Date();
   MyNumber: number = 2;
   constructor() {
@@ -38,18 +37,7 @@ export class ProductComponent {
       { id: 7, name: 'Keyboard', price: 600, quantity: 60, imgUrl: 'https://picsum.photos/200/306', categoryId: 4 },
       { id: 8, name: 'Headphones', price: 700, quantity: 70, imgUrl: 'https://picsum.photos/200/307', categoryId: 4 },
     ];
-    this.Categories = [
-      { id: 1, name: 'Electronics' },
-      { id: 2, name: 'Clothing' },
-      { id: 3, name: 'Home' },
-      { id: 4, name: 'Sports' },
-      { id: 5, name: 'Beauty' },
-      { id: 6, name: 'Toys' },
-      { id: 7, name: 'Books' },
-      { id: 8, name: 'Furniture' },
-      { id: 9, name: 'Jewelry' },
-      { id: 10, name: 'Shoes' },
-    ];
+   
   }
   Buy(count: string, price: number) {
     const countNumber = parseInt(count, 10);
@@ -59,18 +47,18 @@ export class ProductComponent {
   }
   
   Filter() {
-    if (this.selectedCategory != 0) {
-      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
-      // return this.products.filter((product) => product.categoryId == this.selectedCategory);
-      return this.FilteredProduct;
-    } else if( this.selectedCategory == 0) {
-      this.FilteredProduct = this.products
-      return this.FilteredProduct;
-    }
-    else {
-      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
-      return this.FilteredProduct;
-    }
+    // if (this.selectedCategory != 0) {
+    //   this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
+    //   // return this.products.filter((product) => product.categoryId == this.selectedCategory);
+    //   return this.FilteredProduct;
+    // } else if( this.selectedCategory == 0) {
+    //   this.FilteredProduct = this.products
+    //   return this.FilteredProduct;
+    // }
+    // else {
+    //   this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
+    //   return this.FilteredProduct;
+    // }
     
   }
   trackByFn(  index: number, item: iProduct) {
