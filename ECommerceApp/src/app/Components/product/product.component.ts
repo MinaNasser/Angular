@@ -22,6 +22,7 @@ export class ProductComponent {
 
   products: iProduct[];
   Categories: iCategory[] ;
+  FilteredProduct: iProduct[] = [];
   totalOrderPrice: number = 0;
   selectedCategory: number = 1;
   MyDate: Date = new Date();
@@ -59,11 +60,18 @@ export class ProductComponent {
   
   Filter() {
     if (this.selectedCategory != 0) {
-      return this.products.filter((product) => product.categoryId == this.selectedCategory);
+      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
+      // return this.products.filter((product) => product.categoryId == this.selectedCategory);
+      return this.FilteredProduct;
     } else if( this.selectedCategory == 0) {
-      return this.products;
+      this.FilteredProduct = this.products
+      return this.FilteredProduct;
     }
-    return this.products.filter((product) => product.categoryId == this.selectedCategory);
+    else {
+      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.selectedCategory);
+      return this.FilteredProduct;
+    }
+    
   }
   trackByFn(  index: number, item: iProduct) {
     return item.id; // or item.id if you have a unique identifier property
