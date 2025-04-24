@@ -1,0 +1,32 @@
+<!-- String Interpolation -->
+<p>User Name : {{userName}}</p>
+<p>User Age : {{userAge}}</p>
+<hr>
+<p>User </p>
+<ul>
+    <li>Name: {{user.name}}</li>  
+    <li>Age: {{user.age}}</li>
+    <li> {{user.email}}</li>
+    <li>{{user.phone}}</li>
+    <li>{{user.address.street}}</li>
+    <li>{{user.address.city}}</li>
+    <li>{{user.address.state}}</li>
+    <li>{{user.address.zip}}</li>
+
+</ul>
+
+<hr>
+<!-- Property Binding -->
+<img class="img-fluid h-25 w-25 IMG" [src]="userAvatar" alt="">
+<input type="text" [value]="userName">
+<button [disabled]="isStudent">Change User Name</button>
+<hr>
+<!-- Event Binding   -->
+<button (click)="showAlert()">Alert </button>
+<button (click)="showAlert('Hello World')">Alert with parameter</button>
+<hr>
+<!-- Two Way Binding -->
+<!-- <input type="text" [(ngModel)]="userName" placeholder="Enter User Name"> -->
+<p>User Name : {{userName}}</p>
+<p>User Age : {{userAge}}</p>
+<hr>
