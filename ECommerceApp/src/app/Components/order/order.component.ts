@@ -18,6 +18,7 @@ import { ProductComponent } from '../product/product.component';
 export class OrderComponent implements OnInit {
   Categories: iCategory[] ;
   selectedCategory: number = 0;
+  totalOrderPrice: number = 0;
   constructor() { 
     this.Categories = [
       { id: 1, name: 'Electronics' },

@@ -1,3 +1,5 @@
+<h1>Total Order Price : {{totalOrderPrice}}</h1>
+
 <div class="mb-3">
   <label for="" class="form-label">Category</label>
   <select class="form-select form-select-lg" name="" id=""  [(ngModel)]="selectedCategory">
@@ -6,5 +8,7 @@
   </select>
 </div>
 
+<div class="mb-3 ">
+  <app-product [recievedCategoryID]="selectedCategory"></app-product>
+</div>
 
-<app-product></app-product>
