@@ -1,4 +1,8 @@
-<!-- String Interpolation -->
+
+
+
+
+<!-- String Interpolation
 <p>User Name : {{userName}}</p>
 <p>User Age : {{userAge}}</p>
 <hr>
@@ -15,18 +19,38 @@
 
 </ul>
 
-<hr>
+<hr> -->
 <!-- Property Binding -->
-<img class="img-fluid h-25 w-25 IMG" [src]="userAvatar" alt="">
+<!-- <img class="img-fluid h-25 w-25 IMG" [src]="userAvatar" alt="">
 <input type="text" [value]="userName">
 <button [disabled]="isStudent">Change User Name</button>
-<hr>
+<hr> -->
 <!-- Event Binding   -->
-<button (click)="showAlert()">Alert </button>
+<!-- <button (click)="showAlert()">Alert </button>
 <button (click)="showAlert('Hello World')">Alert with parameter</button>
-<hr>
+<hr> -->
 <!-- Two Way Binding -->
 <!-- <input type="text" [(ngModel)]="userName" placeholder="Enter User Name"> -->
-<p>User Name : {{userName}}</p>
+<!-- <p>User Name : {{userName}}</p>
 <p>User Age : {{userAge}}</p>
-<hr>
+<hr> -->
+
+
+
+<!-- 
+<ul>
+    <li *ngFor="let user of users"></li>
+</ul> -->
+<ul>
+    <li *ngFor="let user of users"
+        [ngClass]="user.age > 20 ? 'user_age_green' : 'user_age_red'">
+      {{ user.name }} - {{ user.age }} - {{ user.email }} - {{ user.phone }}
+  
+      <ng-container *ngIf="user.isAdmin">
+        <button>Delete</button>
+      </ng-container>
+    </li>
+  
+    <li *ngIf="users.length === 0">No Users Found</li>
+  </ul>
+  
