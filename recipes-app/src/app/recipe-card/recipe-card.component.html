@@ -1,0 +1,14 @@
+<div class="card h-100">
+  <img [src]="recipeItem.image" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">{{ recipeItem.name }}</h5>
+    <ul class="card-text">
+      @for(ingredient of recipeItem.ingredients; track $index){
+      <li>{{ ingredient }}</li>
+      }
+    </ul>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-danger" (click)="handleDelete(recipeItem.id)">Delete</button>
+  </div>
+</div>

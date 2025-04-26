@@ -1,0 +1,29 @@
+<ul>
+  <li *ngFor="let user of users">
+    <span [ngClass]="user.age < 24 ? 'user_age_red' : 'user_age_green'"
+      >{{ user.name }} - {{ user.age }}</span
+    >
+  </li>
+</ul>
+
+<button *ngIf="isAdmin">Delete users</button>
+
+<hr />
+
+<ul>
+  @for(user of users; track $index) {
+  <li>
+    <span [ngStyle]="{ color: user.age < 24 ? 'red' : 'green' }"
+      >{{ user.name }} - {{ user.age }}</span
+    >
+  </li>
+  } @empty {
+  <p>List is empty</p>
+  }
+</ul>
+
+@if(isAdmin){
+<button>Delete users</button>
+} @else {
+<p>User not an admin</p>
+}
