@@ -5,6 +5,8 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { BioComponent } from "./bio/bio.component";
 import { SkillsSectionComponent } from './skills-section/skills-section.component';
+import { PortfolioProjectsComponent } from './portfolio-projects/portfolio-projects.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,8 @@ import { SkillsSectionComponent } from './skills-section/skills-section.componen
      FontAwesomeModule,
       BioComponent,
       SkillsSectionComponent,
+      PortfolioProjectsComponent,
+      FooterComponent
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
