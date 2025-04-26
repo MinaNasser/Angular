@@ -1,12 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeroSectionComponent } from './hero-section/hero-section.component';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { BioComponent } from "./bio/bio.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [HeroSectionComponent, FontAwesomeModule, BioComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Portfolio';
+
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faFacebook, faGithub, faLinkedin);
+  }
 }
