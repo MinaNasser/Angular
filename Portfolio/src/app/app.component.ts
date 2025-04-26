@@ -4,11 +4,17 @@ import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { BioComponent } from "./bio/bio.component";
+import { SkillsSectionComponent } from './skills-section/skills-section.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeroSectionComponent, FontAwesomeModule, BioComponent],
+  imports: [
+    HeroSectionComponent,
+     FontAwesomeModule,
+      BioComponent,
+      SkillsSectionComponent,
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
