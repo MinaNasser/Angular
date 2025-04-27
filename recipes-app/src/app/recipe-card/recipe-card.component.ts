@@ -11,6 +11,8 @@ export class RecipeCardComponent {
   @Output() sendToParent = new EventEmitter<number>();
   @Output() AlertfromChild = new EventEmitter<string>();
 
+  @Output() display = new EventEmitter<number>();
+
   constructor(){
     console.log("CONSTR.")
   } 
@@ -33,6 +35,10 @@ export class RecipeCardComponent {
   }
   handleAlert(){
     this.AlertfromChild.emit("Hello from Child");
+  }
+  handleDisblay(int : number){
+    console.log(int);
+    this.display.emit(int);
   }
   
 }

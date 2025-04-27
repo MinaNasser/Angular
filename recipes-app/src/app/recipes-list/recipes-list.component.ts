@@ -1071,4 +1071,9 @@ export class RecipesListComponent {
   alertFromChild(message: string) {
     console.log('FROM PARENT', message);
   }
+  displayRecipe(id: number) {
+    this.recipes = this.recipes.filter((recipe) => recipe.id === id);
+    console.log('FROM PARENT', this.recipes);
+  }
+
 }
