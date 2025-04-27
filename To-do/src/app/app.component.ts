@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RecipesListComponent } from './recipes-list/recipes-list.component';
-
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RecipesListComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'recipes-app';
+  title = 'To-do';
 }

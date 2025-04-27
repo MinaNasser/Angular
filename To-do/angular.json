@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "recipes-app": {
+    "To-do": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/recipes-app",
+            "outputPath": "dist/to-do",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -27,7 +27,6 @@
               }
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -60,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "recipes-app:build:production"
+              "buildTarget": "To-do:build:production"
             },
             "development": {
-              "buildTarget": "recipes-app:build:development"
+              "buildTarget": "To-do:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -93,8 +92,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "d1f2457d-c718-460a-a387-5890777c4b70"
   }
 }

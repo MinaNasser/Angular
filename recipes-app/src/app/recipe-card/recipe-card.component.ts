@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, output, Output } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-card',
-  imports: [],
+  standalone: true,
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.css'
 })
 export class RecipeCardComponent {
   @Input() recipeItem : any;
   @Output() sendToParent = new EventEmitter<number>();
+  @Output() AlertfromChild = new EventEmitter<string>();
 
   constructor(){
     console.log("CONSTR.")
@@ -30,6 +31,10 @@ export class RecipeCardComponent {
    console.log(id)
    this.sendToParent.emit(id);
   }
+  handleAlert(){
+    this.AlertfromChild.emit("Hello from Child");
+  }
+  
 }
 
 

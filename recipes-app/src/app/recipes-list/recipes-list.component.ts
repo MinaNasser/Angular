@@ -3,6 +3,7 @@ import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
 
 @Component({
   selector: 'app-recipes-list',
+  standalone: true,
   imports: [RecipeCardComponent],
   templateUrl: './recipes-list.component.html',
   styleUrl: './recipes-list.component.css',
@@ -1066,5 +1067,8 @@ export class RecipesListComponent {
   recievedFromChild(id: number) {
     console.log('FROM PARENT', id);
     this.recipes = this.recipes.filter((recipe) => recipe.id !== id);
+  }
+  alertFromChild(message: string) {
+    console.log('FROM PARENT', message);
   }
 }

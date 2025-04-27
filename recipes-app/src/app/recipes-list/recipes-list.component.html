@@ -6,6 +6,7 @@
     <app-recipe-card
       [recipeItem]="recipe"
       (sendToParent)="recievedFromChild($event)"
+      (AlertfromChild)="alertFromChild($event)"
     ></app-recipe-card>
   </div>
   }
