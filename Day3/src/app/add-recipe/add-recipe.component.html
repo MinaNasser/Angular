@@ -1,1 +1,87 @@
-<p>add-recipe works!</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form  #recipeForm="ngForm" (ngSubmit)="HandelSubmit(recipeForm)">
+          <!-- Recipe Name -->
+          <div class="mb-3">
+            <label for="recipe-name" class="form-label">Recipe Name</label>
+            <input 
+              type="text" 
+              id="recipe-name"
+              name="recipe-name" 
+              class="form-control"
+              placeholder="Enter recipe name"
+              aria-describedby="recipe-name"
+              ngModel
+                required
+              [(ngModel)]="recipeName"
+                minlength="3"
+                maxlength="5"
+                pattern="^[a-zA-Z0-9\s.,!?]+$"
+                #recipeNameInput="ngModel"
+            >
+            @if (recipeNameInput.invalid && (recipeNameInput.touched || recipeNameInput.dirty)) {
+              <div class="text-danger">Recipe name is required</div>
+            } @else if (recipeNameInput.errors?.['minlength']) {
+              <div class="text-danger">Recipe name must be at least 3 characters</div>      
+              
+            } @else if (recipeNameInput.errors?.['maxlength']) {
+              <div class="text-danger">Recipe name must be at most 5 characters</div>
+            } @else if (recipeNameInput.errors?.['pattern']) {
+              <div class="text-danger">Recipe name can only contain letters, numbers, and basic punctuation</div>
+            } @else if (recipeNameInput.valid && (recipeNameInput.touched || recipeNameInput.dirty)) {
+              <div class="text-success">Recipe name is valid</div>
+            } @else if (recipeNameInput.pristine) {
+              <div class="text-muted">Recipe name is required</div>
+            } @else if (recipeNameInput.errors?.['required']) {
+              <div class="text-danger">Recipe name is required</div>
+            }
+
+            <!-- @if (recipeForm.controls['recipe-name']?.invalid && (recipeForm.controls['recipe-name']?.touched || recipeForm.controls['recipe-name']?.dirty)) {
+              <div class="text-danger">Recipe name is required</div>
+              
+            } -->
+          </div>
+  
+          <!-- Recipe Description -->
+          <div class="mb-3">
+            <label for="recipe-description" class="form-label">Recipe Description</label>
+            <textarea
+              id="recipe-description"
+              name="recipe-description"
+              class="form-control"
+              placeholder="Enter recipe description"
+              aria-describedby="recipe-description"
+              rows="5"
+              required
+                minlength="10"
+                maxlength="200"
+                pattern="^[a-zA-Z0-9\s.,!?]+$"
+              [(ngModel)]="recipeDescription"
+                #recipeDescriptionInput="ngModel"
+            ></textarea>
+            @if (recipeDescriptionInput.invalid && (recipeDescriptionInput.touched || recipeDescriptionInput.dirty)) {
+              <div class="text-danger">Recipe description is required</div>
+            } @else if (recipeDescriptionInput.errors?.['minlength']) {
+              <div class="text-danger">Recipe description must be at least 10 characters</div>
+
+            } @else if (recipeDescriptionInput.errors?.['pattern']) {
+              <div class="text-danger">Recipe description can only contain letters, numbers, and basic punctuation</div>
+            } @else if (recipeDescriptionInput.valid && (recipeDescriptionInput.touched || recipeDescriptionInput.dirty)) {
+              <div class="text-success">Recipe description is valid</div>
+            } @else if (recipeDescriptionInput.pristine) {
+              <div class="text-muted">Recipe description is required</div>
+            } @else if (recipeDescriptionInput.errors?.['required']) {
+              <div class="text-danger">Recipe description is required</div>
+            }
+          </div>
+            <!-- @if (recipeForm.controls['recipe-description']?.invalid && (recipeForm.controls['recipe-description']?.touched || recipeForm.controls['recipe-description']?.dirty)) {
+                <div class="text-danger">Recipe description is required</div>
+                
+            } -->
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Add Recipe</button>
+        </form>
+      </div>
+    </div>
+  </div>
