@@ -22,7 +22,7 @@ export const routes: Routes = [
         path: 'add-recipe',
         component: AddRecipeComponent,
         title: 'Add Recipe'
-    },
+    }, 
     {
         path: 'recipe-counter',
         component: RecipeCounterComponent,
