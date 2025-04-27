@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <span class="navbar-brand">Recipes App</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active_link_nav"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Recipes List</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/add-recipe-template"
+          routerLinkActive="active_link_nav"
+          >Add Recipe Template</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/add-recipe-reactive"
+          routerLinkActive="active_link_nav"
+          >Add Recipe Reactive</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/recipe-counter"
+          routerLinkActive="active_link_nav"
+          >Recipe Counter</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/settings"
+          routerLinkActive="active_link_nav"
+          >Settings</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
