@@ -18,7 +18,7 @@ export class RecipesRequestService {
           skip: '0',
         },
         headers: {  
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           // 'Authorization':ACCEC_TOKEN
         }
       }
