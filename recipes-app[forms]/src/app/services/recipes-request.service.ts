@@ -11,7 +11,20 @@ export class RecipesRequestService {
 
 
   getRecipes():Observable<any> {
-    return this.http.get('https://dummyjson.com/recipes');
+    return this.http.get('https://dummyjson.com/recipes',
+      {
+        params: {
+          limit: '10',
+          skip: '0',
+        },
+        headers: {  
+          'Content-Type': 'application/json',
+          // 'Authorization':ACCEC_TOKEN
+        }
+      }
+
+
+    );
   }
   // Observable is a stream of data that can be subscribed to
   // and will emit values over time. It is a core part of the RxJS library,
@@ -23,7 +36,10 @@ export class RecipesRequestService {
   // completion events, making them a powerful tool for managing asynchronous operations
   // in Angular applications.
   getRecipeById(id: string): Observable<any> {
+    
     return this.http.get(`https://dummyjson.com/recipes/${id}`);
   }
-
+  addRecipe(recipe: any) {
+    return this.http.post('https://dummyjson.com/recipes/add', recipe);
+  }
 }
