@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,10 @@ import { Observable } from 'rxjs';
 export class RecipesRequestService {
   http = inject(HttpClient);
   constructor() { }
-
+// 'https://dummyjson.com/recipes'
 
   getRecipes():Observable<any> {
-    return this.http.get('https://dummyjson.com/recipes',
+    return this.http.get(environment.apiUrl + '/recipes',
       {
         params: {
           limit: '10',
@@ -37,7 +38,7 @@ export class RecipesRequestService {
   // in Angular applications.
   getRecipeById(id: string): Observable<any> {
     
-    return this.http.get(`https://dummyjson.com/recipes/${id}`);
+    return this.http.get(`${environment.apiUrl}/${id}`);
   }
   addRecipe(recipe: any) {
     return this.http.post('https://dummyjson.com/recipes/add', recipe);
