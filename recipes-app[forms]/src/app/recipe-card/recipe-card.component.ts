@@ -6,7 +6,8 @@ import { Recipe } from '../types/recipe';
 
 @Component({
   selector: 'app-recipe-card',
-  imports: [DatePipe , UpperCasePipe , RatePipe],
+  standalone: true,
+  imports: [DatePipe, UpperCasePipe, RatePipe],
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.css',
 })
@@ -16,7 +17,7 @@ export class RecipeCardComponent {
   @Output() sendToParent = new EventEmitter<number>();
 
   // router = inject(Router);
-  constructor(private router: Router){}
+  constructor(private router: Router,) { }
 
   handleDelete(id: number) {
     this.sendToParent.emit(id);

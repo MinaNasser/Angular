@@ -1,8 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RecipesRequestService } from '../services/recipes-request.service';
 
 @Component({
   selector: 'app-recipe-details',
+  standalone: true,
   imports: [],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'
@@ -16,9 +18,22 @@ export class RecipeDetailsComponent {
   // }
 
   @Input() id : string = '';
+  constructor(private recipeServe : RecipesRequestService) {}
+    // this.id = this.activatedRoute.snapshot.params['id'];}
 
   ngOnInit(){
-    console.log(this.id)
+    // const id = this.activatedRoute.snapshot.params['id']
+    // console.log(this.activatedRoute.snapshot.params['id']);
+    this.recipeServe.getRecipeById(this.id).subscribe(
+      (data) => {
+      console.log(data);
+    },
+    (error) => {
+      console.log(error);
+    }
+    
+  
+  );
   }
 }
 
