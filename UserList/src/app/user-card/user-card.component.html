@@ -1,11 +1,13 @@
-<div class="user-card" >
+<div class="card user-card p-3 shadow-sm">
+  <img [src]="user.image" alt="User Image" class="card-img-top user-image mx-auto mt-2" />
 
-  <img [src]="user.image" alt="User Image" class="user-image " />
-  <div class="user-info">
-    <h2 [ngClass]="getRoleClass(user.role)">{{ user.role }}</h2>
-    <h3>{{ user.firstName }} {{ user.lastName }}</h3>
-    <p>Email: {{ user.email }}</p>
-    <p>Phone: {{ user.phone }}</p>
-    <p>Age: {{ user.age }}</p>
+  <div class="card-body text-center">
+    <span class="badge role-chip mb-2" [ngClass]="getRoleClass(user.role)">
+      {{ user.role }}
+    </span>
+    <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+    <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+    <p class="card-text"><strong>Phone:</strong> {{ user.phone }}</p>
+    <p class="card-text"><strong>Birthdate:</strong> {{ user.age }}</p>
   </div>
 </div>

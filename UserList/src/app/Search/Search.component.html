@@ -1,9 +1,10 @@
-<div class="search">
+<div class="search d-flex align-items-center gap-2 mt-3">
   <input
     type="text"
     class="form-control"
-    placeholder="Search for a user"
+    placeholder="Search by email"
     [(ngModel)]="searchTerm"
   />
   <button class="btn btn-primary" (click)="search()">Search</button>
+  <button class="btn btn-secondary" *ngIf="searchTerm" (click)="reset()">Reset</button>
 </div>

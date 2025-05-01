@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit {
     if (query) {
       this.filteredUserList = this.userList.filter(user =>
         user.firstName.toLowerCase().includes(query.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(query.toLowerCase())
+        user.email.toLowerCase().includes(query.toLowerCase())
       );
     } else {
       this.filteredUserList = this.userList; // إذا لم يكن هناك نص بحث، عرض جميع المستخدمين
