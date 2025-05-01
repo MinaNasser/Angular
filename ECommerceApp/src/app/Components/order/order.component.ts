@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit ,AfterViewInit {
   // non  null assertion operator
   // myInput!: ElementRef;
   @ViewChild('userName') myInput!: ElementRef;
-
+  @ViewChild(ProductComponent) productComponentObject!: ElementRef;
 
   constructor() {
 
@@ -42,6 +42,7 @@ export class OrderComponent implements OnInit ,AfterViewInit {
   ngAfterViewInit(): void {
     this.myInput.nativeElement.focus();
     console.log(this.myInput.nativeElement.value);
+    console.log(this.productComponentObject);
   }
 
   ngOnInit() {
