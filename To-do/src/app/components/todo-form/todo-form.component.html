@@ -1,1 +1,12 @@
-<p>todo-form works!</p>
+<div class="border border-warning p-3 mb-3">
+  <h4>Add New To-Do</h4>
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter new task"
+      [(ngModel)]="newTodo"
+    />
+    <button class="btn btn-primary" (click)="addTodo()">Add</button>
+  </div>
+</div>
