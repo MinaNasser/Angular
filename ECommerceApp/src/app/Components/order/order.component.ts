@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, viewChild } from '@angular/core';
 import { iCategory } from '../../Models/icategory';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -15,11 +15,17 @@ import { ProductComponent } from '../product/product.component';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
-  Categories: iCategory[] ;
+export class OrderComponent implements OnInit ,AfterViewInit {
+  Categories: iCategory[];
   selectedCategory: number = 0;
   totalOrderPrice: number = 0;
+  // non  null assertion operator
+  // myInput!: ElementRef;
+  @ViewChild('userName') myInput!: ElementRef;
+
+
   constructor() {
+
     this.Categories = [
       { id: 1, name: 'Electronics' },
       { id: 2, name: 'Clothing' },
@@ -33,6 +39,10 @@ export class OrderComponent implements OnInit {
       { id: 10, name: 'Shoes' },
     ];
   }
+  ngAfterViewInit(): void {
+    this.myInput.nativeElement.focus();
+    console.log(this.myInput.nativeElement.value);
+  }
 
   ngOnInit() {
 
@@ -44,5 +54,7 @@ export class OrderComponent implements OnInit {
   CalculateTotalOrderPrice(totalOrderPrice: number) {
     this.totalOrderPrice = totalOrderPrice;
   }
+
+
 
 }
