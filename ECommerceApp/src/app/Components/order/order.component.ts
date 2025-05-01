@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit {
   Categories: iCategory[] ;
   selectedCategory: number = 0;
   totalOrderPrice: number = 0;
-  constructor() { 
+  constructor() {
     this.Categories = [
       { id: 1, name: 'Electronics' },
       { id: 2, name: 'Clothing' },
@@ -35,7 +35,14 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
+  }
+  /**
+   * Event handler for when the total order price changes in the product list
+   * @param totalOrderPrice the new total order price
+   */
+  CalculateTotalOrderPrice(totalOrderPrice: number) {
+    this.totalOrderPrice = totalOrderPrice;
   }
 
 }

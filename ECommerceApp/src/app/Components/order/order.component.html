@@ -9,6 +9,13 @@
 </div>
 
 <div class="mb-3 ">
-  <app-product [recievedCategoryID]="selectedCategory"></app-product>
+  <app-product [recievedCategoryID]="selectedCategory"
+  (onTotalOrderPriceChanged)="CalculateTotalOrderPrice($event)"
+
+  ></app-product>
+
+
 </div>
 
+
+<h1>Total Order Price : {{totalOrderPrice}}</h1>
