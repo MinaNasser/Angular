@@ -69,6 +69,7 @@ export class ProductComponent implements OnChanges {
     return item.id; // or item.id if you have a unique identifier property
   }
   ngOnChanges() {
-    this.Filter();
+    // this.Filter();
+    this.FilteredProduct = this._productService.getProductsByCategory(this.recievedCategoryID);
   }
 }

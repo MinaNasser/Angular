@@ -26,9 +26,12 @@ export class StaticProductService {
     let product = this.products.find(product => product.id == id);
     return product?product:undefined;
   }
-  getProductsByCategory(categoryId: number): iProduct[] | undefined {
-    let filteredProducts = this.products.filter(product => product.categoryId == categoryId);
-    return filteredProducts?filteredProducts:undefined;
+  getProductsByCategory(categoryId: number): iProduct[]  {
+    if(categoryId==0)
+    return this.products;
+
+    return this.products.filter(product => product.categoryId == categoryId);
+
   }
   getProductsByPrice(minPrice: number, maxPrice: number): iProduct[] {
     return this.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
