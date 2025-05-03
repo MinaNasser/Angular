@@ -12,9 +12,7 @@ import { OrderComponent } from './Components/order/order.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    OrderComponent,
-
-  ],
+  ], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
