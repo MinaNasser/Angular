@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
 import { SquarePipe } from '../../pipe/square.pipe';
 import { StaticProductService } from '../../services/static-product.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,7 @@ import { StaticProductService } from '../../services/static-product.service';
     FormsModule,
     HighlightCardDirective,
     SquarePipe,
+    RouterLink  
 
   ],
   templateUrl: './product.component.html',

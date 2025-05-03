@@ -9,10 +9,10 @@ import { VisionComponent } from './Components/vision/vision.component';
 import { ValuesComponent } from './Components/values/values.component';
 
 export const routes: Routes = [
-  {path : '' ,component : HomeComponent , title : 'Home'},
+  {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path : 'products' , component : ProductComponent, title : 'Products'},
-  {path : 'productDetails' , component : ProductDetailsComponent, title : 'Product Details'},
+  {path : 'products-details' , component : ProductDetailsComponent, title : 'Product Details'},
   {path : 'order' , component : OrderComponent, title : 'Order'},
   {path : 'about' , component : AboutUsComponent, title : 'About Us',
     children : [

@@ -18,11 +18,15 @@
           <p class="card-text" *ngSwitchDefault>Quantity : {{prd.quantity}}</p>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mt-auto " 
+        <div class="d-flex justify-content-between align-items-center mt-auto "
           [ngClass]="{ 'd-none': prd.quantity == 0 }">
           <input type="number" #CountInput class="form-control me-2" placeholder="Quantity" />
           <button class="btn btn-success" (click)="Buy(CountInput.value, prd.price)">Buy</button>
+          <!-- Details -->
+
         </div>
+        <hr>
+        <button class="btn btn-success" routerLink="/products-details">Details</button>
       </div>
 
     </div>
@@ -63,7 +67,7 @@
 
           </div>
 
-          <p class="cared-text" *ngIf="prd.quantity!=1;else lastItem" 
+          <p class="cared-text" *ngIf="prd.quantity!=1;else lastItem"
         >Quantity : {{prd.quantity}} </p>
         <ng-template #lastItem>
           <p class="cared-text">Quantity : Last Item</p>
