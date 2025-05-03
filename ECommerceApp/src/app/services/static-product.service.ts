@@ -36,5 +36,8 @@ export class StaticProductService {
   getProductsByPrice(minPrice: number, maxPrice: number): iProduct[] {
     return this.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
   }
+  getProductById(id: number): iProduct|undefined {
+    return this.products.find(product => product.id == id);
+  }
 
 }

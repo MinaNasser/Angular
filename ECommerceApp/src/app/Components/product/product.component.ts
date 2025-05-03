@@ -46,7 +46,7 @@ export class ProductComponent implements OnChanges {
   }
   Details(id  : number) {
     // this.router.navigate(['products-details'], { queryParams: { id: arg0 } });
-    this.router.navigateByUrl('products-details');
+    this.router.navigate(['/products-details', id]);
     console.log(id);
   }
 
