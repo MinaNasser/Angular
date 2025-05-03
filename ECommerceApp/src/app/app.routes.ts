@@ -14,7 +14,9 @@ export const routes: Routes = [
   {path : 'products' , component : ProductComponent, title : 'Products'},
   {path : 'productDetails' , component : ProductDetailsComponent, title : 'Product Details'},
   {path : 'order' , component : OrderComponent, title : 'Order'},
-  {path : 'about' , component : AboutUsComponent, title : 'About Us',children : [
+  {path : 'about' , component : AboutUsComponent, title : 'About Us',
+    children : [
+    {path : '' ,pathMatch : 'full',redirectTo : 'vision', title : 'Vision'},
     {path : 'vision' , component : VisionComponent, title : 'Vision'},
     {path : 'values' , component : ValuesComponent, title : 'Values'},
   ]},
