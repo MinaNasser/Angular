@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
 import { SquarePipe } from '../../pipe/square.pipe';
 import { StaticProductService } from '../../services/static-product.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -16,13 +16,14 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     HighlightCardDirective,
     SquarePipe,
-    RouterLink  
+    // RouterLink
 
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnChanges {
+
 
   products: iProduct[];
   @Input() recievedCategoryID: number = 0;
@@ -32,17 +33,25 @@ export class ProductComponent implements OnChanges {
   MyNumber: number = 2;
 
 
-  @Output() onTotalOrderPriceChanged : EventEmitter<number> ;
+  @Output() onTotalOrderPriceChanged: EventEmitter<number>;
 
 
 
   // productService=inject(StaticProductService);
-  constructor(private _productService: StaticProductService) {
+  constructor(private _productService: StaticProductService, private router: Router) {
     this.products = this._productService.getProducts();
     this.onTotalOrderPriceChanged = new EventEmitter<number>();
 
 
   }
+  Details(id  : number) {
+    // this.router.navigate(['products-details'], { queryParams: { id: arg0 } });
+    this.router.navigateByUrl('products-details');
+    console.log(id);
+  }
+
+
+
   Buy(count: string, price: number) {
     const countNumber = parseInt(count, 10);
     if (!isNaN(countNumber) && countNumber > 0) {
@@ -57,7 +66,7 @@ export class ProductComponent implements OnChanges {
       this.FilteredProduct = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
       // return this.products.filter((product) => product.categoryId == this.selectedCategory);
       return this.FilteredProduct;
-    } else if( this.recievedCategoryID == 0) {
+    } else if (this.recievedCategoryID == 0) {
       this.FilteredProduct = this.products
       return this.FilteredProduct;
     }
@@ -67,7 +76,7 @@ export class ProductComponent implements OnChanges {
     }
 
   }
-  trackByFn(  index: number, item: iProduct) {
+  trackByFn(index: number, item: iProduct) {
     return item.id; // or item.id if you have a unique identifier property
   }
   ngOnChanges() {
