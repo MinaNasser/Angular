@@ -26,8 +26,8 @@ export class NotificationService {
     ];
   }
 
-  getNotification() {
-    let myObservable = new Observable(observer => {
+  getNotification(): Observable<string> {
+    return new Observable(observer => {
       // observer.next(this.notification);
       // observer.complete();
       // observer.error('Error');
