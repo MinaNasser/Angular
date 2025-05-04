@@ -6,3 +6,13 @@
 <h1>{{product?.quantity}}</h1>
 
 <!-- img -->
+
+
+<button class="btn btn-primary" (click)="goBack()">Go Back</button>
+
+
+<div class="d-flex justify-content-between align-items-center mt-auto ">
+  <!-- next & previous btn -->
+  <button class="btn btn-danger" (click)="GoPrevious()">Previous</button>
+  <button class="btn btn-success" (click)="GoNext()">Next</button>
+</div>

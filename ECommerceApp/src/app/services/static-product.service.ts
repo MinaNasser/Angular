@@ -39,5 +39,10 @@ export class StaticProductService {
   getProductById(id: number): iProduct|undefined {
     return this.products.find(product => product.id == id);
   }
-
+  mapProductsToIds(products: iProduct[]): number[] {
+    return products.map(product => product.id);
+  }
+  mapProductsToIDS(): number[] {
+    return this.products.map(product => product.id);
+  }
 }
