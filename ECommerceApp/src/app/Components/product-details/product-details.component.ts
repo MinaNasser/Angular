@@ -11,17 +11,22 @@ import { StaticProductService } from '../../services/static-product.service';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
-    product: iProduct|undefined;
-  id:number = 0;
-  constructor(private _activatedRoute:ActivatedRoute,private _productService: StaticProductService){
+  product: iProduct | undefined;
+  id!: number ;
+  constructor(private _activatedRoute: ActivatedRoute, private _productService: StaticProductService) {
 
   }
   ngOnInit(): void {
     this.id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
-   console.log(this.id);
+    console.log("From ngOnInit: " + this.id);
+    this.product = this.getProductById(this.id);
+
+
   }
-  getProductById(id:number){
-    this.product = this._productService.getProductById(id);
+
+
+  getProductById(id: number) :iProduct|undefined {
+    return this._productService.getProductById(id);
   }
 
 }
