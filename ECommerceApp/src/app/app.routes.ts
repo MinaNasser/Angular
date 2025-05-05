@@ -7,10 +7,12 @@ import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { ProductComponent } from './Components/product/product.component';
 import { VisionComponent } from './Components/vision/vision.component';
 import { ValuesComponent } from './Components/values/values.component';
+import { LoginComponent } from './Components/login/login.component';
 
 export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
+  {path: 'login', component: LoginComponent, title: 'Login'},
   {path : 'products' , component : ProductComponent, title : 'Products'},
   {path : 'products-details/:id' , component : ProductDetailsComponent, title : 'Product Details'},
   {path : 'order' , component : OrderComponent, title : 'Order'},
@@ -20,6 +22,7 @@ export const routes: Routes = [
     {path : 'vision' , component : VisionComponent, title : 'Vision'},
     {path : 'values' , component : ValuesComponent, title : 'Values'},
   ]},
+
 
 
   //Wild Card Route for 404 request
