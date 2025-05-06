@@ -1,1 +1,4 @@
-<p>login works!</p>
+<div class="container">
+  <button class="btn btn-primary m-3" [disabled]="isLoggedIn" (click)="login()">Login</button>
+  <button class="btn btn-danger m-3" [disabled]="!isLoggedIn" (click)="logout()">Logout</button>
+</div>
