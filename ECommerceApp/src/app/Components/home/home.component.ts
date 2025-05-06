@@ -4,7 +4,8 @@ import { filter, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  // imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit ,OnDestroy{
     this.subscription = this._notificationS.getNotification()
     .pipe(
       map((data) => data.toUpperCase()),
-      
+
       filter((data) => data != '')
     )
     .subscribe({
