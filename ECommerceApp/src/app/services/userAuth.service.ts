@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserAuthService {
   // isUserLoggedIn: boolean = false;
-  authSubject: BehaviorSubject<boolean>;
+  private authSubject: BehaviorSubject<boolean>;
 
   constructor() {
     this.authSubject = new BehaviorSubject<boolean>(false);
@@ -33,6 +33,10 @@ export class UserAuthService {
 
   getUserLoggedIn(): boolean {
     return (localStorage.getItem('token') == null) ? false : true;
+  }
+
+  getAuthSubject(): BehaviorSubject<boolean> {
+    return this.authSubject;
   }
   
 
