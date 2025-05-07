@@ -1,6 +1,5 @@
 {
-
-  "products":[
+  "products": [
     {
       "id": 1,
       "name": "Essence Mascara Lash Princess",
@@ -1552,10 +1551,17 @@
       "quantity": 100,
       "imgUrl": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
       "categoryId": 24
+    },
+    {
+      "id": 195,
+      "name": "Iphone",
+      "quantity": 12,
+      "imgUrl": "C:\\fakepath\\1745136204899.gif",
+      "price": 120000,
+      "categoryId": "14"
     }
   ],
-
-  "categories" :[
+  "categories": [
     {
       "id": 1,
       "name": "Beauty"
@@ -1651,6 +1657,11 @@
     {
       "id": 24,
       "name": "Womens Watches"
+    },
+    {
+      "id": 25,
+      "name": "Other"
     }
+
   ]
 }

@@ -9,7 +9,12 @@
 
   <div style="margin-bottom: 10px;">
     <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" [(ngModel)]="product.name" required>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name"
+    required
+    pattern="[a-zA-Z0-9]+"
+    title="Name can only contain letters and numbers."
+    
+    >
   </div>
 
   <div style="margin-bottom: 10px;">

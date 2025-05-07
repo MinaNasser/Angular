@@ -1,13 +1,10 @@
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { iProduct } from '../../Models/iproduct';
 import { CommonModule } from '@angular/common';
-import { iCategory } from '../../Models/icategory';
 import { FormsModule } from '@angular/forms';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
-import { SquarePipe } from '../../pipe/square.pipe';
-import { StaticProductService } from '../../services/static-product.service';
-import { Router, RouterLink } from '@angular/router';
 import { APIProductService } from '../../services/apiproduct.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -16,92 +13,90 @@ import { APIProductService } from '../../services/apiproduct.service';
     CommonModule,
     FormsModule,
     HighlightCardDirective,
-    SquarePipe,
-    // RouterLink
-
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements OnChanges , OnInit {
+export class ProductComponent implements OnChanges, OnInit {
 
-
-  products: iProduct[]=[] as iProduct[];
-  @Input() recievedCategoryID: number = 0;
+  products: iProduct[] = [];
   FilteredProducts: iProduct[] = [];
+  paginatedProducts: iProduct[] = [];
+
+  @Input() recievedCategoryID: number = 0;
+  @Output() onTotalOrderPriceChanged: EventEmitter<number> = new EventEmitter<number>();
+
   totalOrderPrice: number = 0;
-  MyDate: Date = new Date();
-  MyNumber: number = 2;
 
+  currentPage: number = 1;
+  itemsPerPage: number = 6;  // الحجم الأول للصفحة
+  // pageSizeOptions: number[] = [3, 6, 9, 12];  // خيارات تغيير الحجم
+  totalPages: number = 1;
 
-  @Output() onTotalOrderPriceChanged: EventEmitter<number>;
+  constructor(private _productService: APIProductService, private router: Router) {}
 
-
-
-  // productService=inject(StaticProductService);
-  constructor(private _productService: APIProductService, private router: Router) {
-    
-    this.onTotalOrderPriceChanged = new EventEmitter<number>();
-
-
-  }
   ngOnInit(): void {
-    this._productService.GetAllProducts().subscribe(
-      next => {
-        this.products = next;
-        this.FilteredProducts = this.products;
-      } 
-    );
-  }
-  // Details(id  : number) {
-  //   // this.router.navigate(['products-details'], { queryParams: { id: arg0 } });
-  //   this.router.navigate(['/products-details', id]);
-  //   console.log("from details btn"+ id);
-  // }
-
-  Details(id: number) {
-
-      this.router.navigate(['/products-details', id]);
-
-    console.log("Navigating to: ", id);
+    this._productService.GetAllProducts().subscribe(next => {
+      this.products = next;
+      this.FilteredProducts = next;
+      this.updatePaginatedProducts();
+    });
   }
 
-
-
+  ngOnChanges() {
+    this._productService.GetProductsByCategory(this.recievedCategoryID).subscribe(next => {
+      this.FilteredProducts = next;
+      this.currentPage = 1;  // إعادة تعيين الصفحة إلى الأولى عند تغيير الفئة
+      this.updatePaginatedProducts();
+    });
+  }
 
   Buy(count: string, price: number) {
     const countNumber = parseInt(count, 10);
     if (!isNaN(countNumber) && countNumber > 0) {
       this.totalOrderPrice += countNumber * price;
-      // fIRE EVENT TO PARENT
       this.onTotalOrderPriceChanged.emit(this.totalOrderPrice);
     }
   }
 
-  Filter() {
-    if (this.recievedCategoryID != 0) {
-      this.FilteredProducts = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
-      // return this.products.filter((product) => product.categoryId == this.selectedCategory);
-      return this.FilteredProducts;
-    } else if (this.recievedCategoryID == 0) {
-      this.FilteredProducts = this.products
-      return this.FilteredProducts;
-    }
-    else {
-      this.FilteredProducts = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
-      return this.FilteredProducts;
-    }
+  Details(id: number) {
+    this.router.navigate(['/products-details', id]);
+  }
 
+  updatePaginatedProducts() {
+    // حساب النطاق الصحيح للصفحة الحالية
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+
+    // تأكد من أن المنتجات التي تعرض تكون ضمن النطاق الصحيح
+    this.paginatedProducts = this.FilteredProducts.slice(start, end);
+
+    // حساب إجمالي عدد الصفحات بناءً على عدد المنتجات في FilteredProducts
+    this.totalPages = Math.ceil(this.FilteredProducts.length / this.itemsPerPage);
   }
+
+  nextPage() {
+    // تأكد من عدم تجاوز العدد الإجمالي للصفحات
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedProducts();
+    }
+  }
+
+  prevPage() {
+    // تأكد من عدم الانتقال إلى صفحة سابقة إذا كانت الصفحة الحالية هي الأولى
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedProducts();
+    }
+  }
+
+  onPageSizeChange() {
+    this.currentPage = 1;  // إعادة تعيين الصفحة إلى الأولى عند تغيير الحجم
+    this.updatePaginatedProducts();  // تحديث المنتجات بناءً على عدد العناصر في الصفحة
+  }
+
   trackByFn(index: number, item: iProduct) {
-    return item.id; // or item.id if you have a unique identifier property
-  }
-  ngOnChanges() {
-    // this.Filter();
-     this._productService.GetProductsByCategory(this.recievedCategoryID).subscribe(
-       next => {
-         this.FilteredProducts = next;
-       }
-     );
+    return item.id;
   }
 }
