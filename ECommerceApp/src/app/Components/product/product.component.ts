@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { iProduct } from '../../Models/iproduct';
 import { CommonModule } from '@angular/common';
 import { iCategory } from '../../Models/icategory';
@@ -7,6 +7,7 @@ import { HighlightCardDirective } from '../../directives/highlight-card.directiv
 import { SquarePipe } from '../../pipe/square.pipe';
 import { StaticProductService } from '../../services/static-product.service';
 import { Router, RouterLink } from '@angular/router';
+import { APIProductService } from '../../services/apiproduct.service';
 
 @Component({
   selector: 'app-product',
@@ -22,12 +23,12 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements OnChanges {
+export class ProductComponent implements OnChanges , OnInit {
 
 
-  products: iProduct[];
+  products: iProduct[]=[] as iProduct[];
   @Input() recievedCategoryID: number = 0;
-  FilteredProduct: iProduct[] = [];
+  FilteredProducts: iProduct[] = [];
   totalOrderPrice: number = 0;
   MyDate: Date = new Date();
   MyNumber: number = 2;
@@ -38,11 +39,19 @@ export class ProductComponent implements OnChanges {
 
 
   // productService=inject(StaticProductService);
-  constructor(private _productService: StaticProductService, private router: Router) {
-    this.products = this._productService.getProducts();
+  constructor(private _productService: APIProductService, private router: Router) {
+    
     this.onTotalOrderPriceChanged = new EventEmitter<number>();
 
 
+  }
+  ngOnInit(): void {
+    this._productService.GetAllProducts().subscribe(
+      next => {
+        this.products = next;
+        this.FilteredProducts = this.products;
+      } 
+    );
   }
   // Details(id  : number) {
   //   // this.router.navigate(['products-details'], { queryParams: { id: arg0 } });
@@ -51,7 +60,9 @@ export class ProductComponent implements OnChanges {
   // }
 
   Details(id: number) {
-    this.router.navigate(['/products-details', id]);
+
+      this.router.navigate(['/products-details', id]);
+
     console.log("Navigating to: ", id);
   }
 
@@ -69,16 +80,16 @@ export class ProductComponent implements OnChanges {
 
   Filter() {
     if (this.recievedCategoryID != 0) {
-      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
+      this.FilteredProducts = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
       // return this.products.filter((product) => product.categoryId == this.selectedCategory);
-      return this.FilteredProduct;
+      return this.FilteredProducts;
     } else if (this.recievedCategoryID == 0) {
-      this.FilteredProduct = this.products
-      return this.FilteredProduct;
+      this.FilteredProducts = this.products
+      return this.FilteredProducts;
     }
     else {
-      this.FilteredProduct = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
-      return this.FilteredProduct;
+      this.FilteredProducts = this.products.filter((product) => product.categoryId == this.recievedCategoryID);
+      return this.FilteredProducts;
     }
 
   }
@@ -87,6 +98,10 @@ export class ProductComponent implements OnChanges {
   }
   ngOnChanges() {
     // this.Filter();
-    this.FilteredProduct = this._productService.getProductsByCategory(this.recievedCategoryID);
+     this._productService.GetProductsByCategory(this.recievedCategoryID).subscribe(
+       next => {
+         this.FilteredProducts = next;
+       }
+     );
   }
 }

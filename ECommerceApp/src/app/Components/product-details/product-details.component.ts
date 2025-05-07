@@ -1,13 +1,99 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { iProduct } from '../../Models/iproduct';
-import { StaticProductService } from '../../services/static-product.service';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { APIProductService } from '../../services/apiproduct.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+  ],
+  templateUrl: './product-details.component.html',
+  styleUrl: './product-details.component.css'
+})
+export class ProductDetailsComponent implements OnInit {
+  product: iProduct | undefined;
+  currantID: number = 0;
+  idsArr: number[] = [];
+
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _apiProductService: APIProductService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe((params) => {
+      this.currantID = Number(params['id']);
+      this.getProduct(this.currantID);
+    });
+    this._apiProductService.GetAllProducts().subscribe(products => {
+      this.idsArr = products.map(p => Number(p.id));
+      // console.log('idsArr (numbers):', this.idsArr);
+    });
+    
+  }
+
+  getProduct(id: number): void {
+    this._apiProductService.GetProductById(id).subscribe(
+      (product) => {
+        this.product = product;
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  GoNext(): void {
+    if (this.idsArr.length === 0) return;
+    const currantIndex = this.idsArr.findIndex(id => id === this.currantID);
+    if (currantIndex === -1) {
+      console.error('Current ID not found in idsArr:', this.currantID, this.idsArr);
+      return;
+    }
+    const nextIndex = (currantIndex + 1) % this.idsArr.length;
+    const nextId = this.idsArr[nextIndex];
+    this.router.navigateByUrl(`/products-details/${nextId}`);
+  }
+  
+  GoPrevious(): void {
+    if (this.idsArr.length === 0) return;
+    const currantIndex = this.idsArr.findIndex(id => id === this.currantID);
+    if (currantIndex === -1) {
+      console.error('Current ID not found in idsArr:', this.currantID, this.idsArr);
+      return;
+    }
+    const prevIndex = (currantIndex - 1 + this.idsArr.length) % this.idsArr.length;
+    const prevId = this.idsArr[prevIndex];
+    this.router.navigateByUrl(`/products-details/${prevId}`);
+  }
+  goBack(): void {
+    this.router.navigateByUrl('/products');
+  }
+}
+
+
+
+/*
+// import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { iProduct } from '../../Models/iproduct';
+import { StaticProductService } from '../../services/static-product.service';
+import { CommonModule, Location } from '@angular/common';
+import { APIProductService } from '../../services/apiproduct.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-product-details',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -20,6 +106,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _productService: StaticProductService,
+    private _apiProductService: APIProductService,
     private _location: Location,
     private router: Router
 
@@ -30,7 +117,15 @@ export class ProductDetailsComponent implements OnInit {
     // this.id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     this._activatedRoute.paramMap.subscribe((paramMap) => {
       this.currantID = Number(paramMap.get('id'));
-      this.product = this.getProductById(this.currantID);
+      // this.product = this.getProductById(this.currantID);
+      this._apiProductService.GetProductById(this.currantID).subscribe(
+        next => {
+          this.product = next;
+        },
+        error => console.log(error),
+        () => console.log('complete')
+      );
+
     });
     // this.currantID = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     // this.product = this.getProductById(this.currantID);
@@ -98,3 +193,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 }
+
+// 
+// 
+// 11 */

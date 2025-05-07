@@ -8,14 +8,15 @@ import { ProductComponent } from './Components/product/product.component';
 import { VisionComponent } from './Components/vision/vision.component';
 import { ValuesComponent } from './Components/values/values.component';
 import { LoginComponent } from './Components/login/login.component';
-import { authGuard } from './Gaurds/Auth.guard';
+import { authGuard } from './Guards/Auth.guard';
+import { ProductDetailsGuard } from './Guards/product-details.guard';
 
 export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path: 'login', component: LoginComponent, title: 'Login'},
   {path : 'products' , component : ProductComponent, title : 'Products' , canActivate : [authGuard]},
-  {path : 'products-details/:id' , component : ProductDetailsComponent, title : 'Product Details'},
+  {path : 'products-details/:id' , component : ProductDetailsComponent, title : 'Product Details' , canActivate : [ProductDetailsGuard] },
   {path : 'order' , component : OrderComponent, title : 'Order'},
   {path : 'about' , component : AboutUsComponent, title : 'About Us',
     children: [
