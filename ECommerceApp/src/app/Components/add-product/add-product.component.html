@@ -1,0 +1,25 @@
+<h2>Add Product</h2>
+<form (ngSubmit)="Add()">
+  <label>ID:</label>
+  <input type="text" [(ngModel)]="product.id" name="id" required><br>
+
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="product.name" name="name" required><br>
+
+  <label>Quantity:</label>
+  <input type="number" [(ngModel)]="product.quantity" name="quantity" required><br>
+
+  <label>Image URL:</label>
+  <input type="text" [(ngModel)]="product.imgUrl" name="imgUrl"><br>
+
+  <label>Price:</label>
+  <input type="number" [(ngModel)]="product.price" name="price" required><br>
+
+  <label>Category:</label>
+  <select [(ngModel)]="product.categoryId" name="categoryId" required>
+    <option value="">-- Select Category --</option>
+    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+  </select><br><br>
+
+  <button type="submit">Submit</button>
+</form>
