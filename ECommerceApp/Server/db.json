@@ -1,5 +1,5 @@
 {
- 
+
   "products":[
     {
       "id": 1,
@@ -1555,7 +1555,7 @@
     }
   ],
 
-  "category" :[
+  "categories" :[
     {
       "id": 1,
       "name": "Beauty"

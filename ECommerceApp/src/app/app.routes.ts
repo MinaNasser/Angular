@@ -10,6 +10,7 @@ import { ValuesComponent } from './Components/values/values.component';
 import { LoginComponent } from './Components/login/login.component';
 import { authGuard } from './Guards/Auth.guard';
 import { ProductDetailsGuard } from './Guards/product-details.guard';
+import { AddProductComponent } from './Components/add-product/add-product.component';
 
 export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path : 'vision' , component : VisionComponent, title : 'Vision'},
     {path : 'values' , component : ValuesComponent, title : 'Values'},
   ]},
+  {path : 'add-product' , component : AddProductComponent, title : 'Add Product'},
 
 
 

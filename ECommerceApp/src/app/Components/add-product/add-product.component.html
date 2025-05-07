@@ -1,25 +1,39 @@
 <h2>Add Product</h2>
-<form (ngSubmit)="Add()">
-  <label>ID:</label>
-  <input type="text" [(ngModel)]="product.id" name="id" required><br>
+<p>{{product | json}}</p>
 
-  <label>Name:</label>
-  <input type="text" [(ngModel)]="product.name" name="name" required><br>
+<form (ngSubmit)="AddProduct()" #productForm="ngForm">
+  <!-- <div style="margin-bottom: 10px;">
+    <label for="id">ID:</label><br>
+    <input type="text" id="id" name="id" [(ngModel)]="product.id" required>
+  </div> -->
 
-  <label>Quantity:</label>
-  <input type="number" [(ngModel)]="product.quantity" name="quantity" required><br>
+  <div style="margin-bottom: 10px;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name" required>
+  </div>
 
-  <label>Image URL:</label>
-  <input type="text" [(ngModel)]="product.imgUrl" name="imgUrl"><br>
+  <div style="margin-bottom: 10px;">
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" id="quantity" name="quantity" [(ngModel)]="product.quantity" required>
+  </div>
 
-  <label>Price:</label>
-  <input type="number" [(ngModel)]="product.price" name="price" required><br>
+  <div style="margin-bottom: 10px;">
+    <label for="imgUrl">Image URL:</label><br>
+    <input type="text" id="imgUrl" name="imgUrl" [(ngModel)]="product.imgUrl">
+  </div>
 
-  <label>Category:</label>
-  <select [(ngModel)]="product.categoryId" name="categoryId" required>
-    <option value="">-- Select Category --</option>
-    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-  </select><br><br>
+  <div style="margin-bottom: 10px;">
+    <label for="price">Price:</label><br>
+    <input type="number" id="price" name="price" [(ngModel)]="product.price" required>
+  </div>
 
-  <button type="submit">Submit</button>
+  <div style="margin-bottom: 20px;">
+    <label for="categoryId">Category:</label><br>
+    <select id="categoryId" name="categoryId" [(ngModel)]="product.categoryId" required>
+      <option value="">-- Select Category --</option>
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="!productForm.form.valid">Submit</button>
 </form>
