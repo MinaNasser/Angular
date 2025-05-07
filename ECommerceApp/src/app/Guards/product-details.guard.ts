@@ -8,23 +8,19 @@ import { Observable, of } from 'rxjs';
 })
 export class ProductDetailsGuard implements CanActivate {
 
-  constructor(private router: Router, private apiProductService: APIProductService) {}
+  constructor(private router: Router, private apiProductService: APIProductService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const id = Number(route.paramMap.get('id'));
-
-    // ✅ أول فحص: هل id رقم صحيح وأكبر من صفر؟
     if (isNaN(id) || id <= 0) {
       console.warn('Invalid product ID: ', id);
-      this.router.navigate(['/not-found']);  // أو روح صفحة تانية حسب ما تحب
+      this.router.navigate(['/not-found']);
       return false;
     }
 
-    // ✅ تاني فحص: هل id موجود فعلا ضمن المنتجات؟
-    // هنا بنستخدم APIProductService عشان نجيب كل المنتجات (لو معاك البيانات كلها في الكلينت بس ممكن تحلها أسهل)
     return new Promise((resolve) => {
       this.apiProductService.GetAllProducts().subscribe(products => {
         const maxId = Math.max(...products.map(p => p.id));
