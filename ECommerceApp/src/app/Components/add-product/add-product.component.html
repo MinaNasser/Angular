@@ -19,7 +19,7 @@
 
   <div style="margin-bottom: 10px;">
     <label for="imgUrl">Image URL:</label><br>
-    <input type="text" id="imgUrl" name="imgUrl" [(ngModel)]="product.imgUrl">
+    <input type="file" id="imgUrl" name="imgUrl" [(ngModel)]="product.imgUrl">
   </div>
 
   <div style="margin-bottom: 10px;">
@@ -35,5 +35,5 @@
     </select>
   </div>
 
-  <button type="submit" [disabled]="!productForm.form.valid">Submit</button>
+  <button type="submit" [disabled]="!productForm.form.valid" class="btn btn-primary">Submit</button>
 </form>

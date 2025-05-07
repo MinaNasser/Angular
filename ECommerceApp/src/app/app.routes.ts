@@ -25,7 +25,7 @@ export const routes: Routes = [
     {path : 'vision' , component : VisionComponent, title : 'Vision'},
     {path : 'values' , component : ValuesComponent, title : 'Values'},
   ]},
-  {path : 'add-product' , component : AddProductComponent, title : 'Add Product'},
+  {path : 'add-product' , component : AddProductComponent, title : 'Add Product', canActivate : [authGuard]},
 
 
 
