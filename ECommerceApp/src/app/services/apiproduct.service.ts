@@ -3,19 +3,20 @@ import { Observable } from 'rxjs';
 import { iProduct } from '../Models/iproduct';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
+import { UserAuthService } from './userAuth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIProductService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient , private _usrAuth : UserAuthService) { }
 
   // Get all products
   GetAllProducts(): Observable<iProduct[]>  {
     return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products`,{
       headers: new HttpHeaders({
-        "authorization":"dahsgdhasgdhsagdhsahvdsghhd",
+        "authorization":this._usrAuth.getToken(),
         // `Bearer ${localStorage.getItem("token")}`
       })
     })
