@@ -38,7 +38,10 @@ export class UserAuthService {
   getAuthSubject(): BehaviorSubject<boolean> {
     return this.authSubject;
   }
-  
+  getToken(): string | null {
+    return localStorage.getItem('token')? localStorage.getItem('token'): null;
+  }
+
 
 
 }
