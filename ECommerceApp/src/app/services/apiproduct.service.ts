@@ -30,9 +30,14 @@ export class APIProductService {
 
   // Get products by category
   GetProductsByCategory(id: number): Observable<iProduct[]> {
+    let searchString = new HttpParams()
+    searchString.append("categoryId",id.toString())
+    searchString = searchString.append("limit",10)
+
     return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products`,
       {
-        params:new HttpParams().set("categoryId",id.toString())
+        // params:new HttpParams().set("categoryId",id.toString())
+        params:searchString
       }
     );
   }
