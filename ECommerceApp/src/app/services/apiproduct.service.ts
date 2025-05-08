@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { iProduct } from '../Models/iproduct';
 import { Injectable } from '@angular/core';
@@ -30,12 +30,18 @@ export class APIProductService {
 
   // Get products by category
   GetProductsByCategory(id: number): Observable<iProduct[]> {
-    return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products?categoryId=${id}`);
+    return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products`,
+      {
+        params:new HttpParams().set("categoryId",id.toString())
+      }
+    );
   }
 
   // Add new product
   AddProduct(product: iProduct): Observable<iProduct> {
-    return this.httpClient.post<iProduct>(`${environment.apiUrl}/products`, product);
+    return this.httpClient.post<iProduct>(`${environment.apiUrl}/products`,
+      JSON.stringify(product),
+    );
   }
 
   // Update product
