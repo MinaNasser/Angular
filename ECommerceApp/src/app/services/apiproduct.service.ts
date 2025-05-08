@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { iProduct } from '../Models/iproduct';
 import { Injectable } from '@angular/core';
@@ -12,8 +12,14 @@ export class APIProductService {
   constructor(private httpClient: HttpClient) { }
 
   // Get all products
-  GetAllProducts(): Observable<iProduct[]> {
-    return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products`);
+  GetAllProducts(): Observable<iProduct[]>  {
+    return this.httpClient.get<iProduct[]>(`${environment.apiUrl}/products`,{
+      headers: new HttpHeaders({
+        "authorization":"dahsgdhasgdhsagdhsahvdsghhd",
+        // `Bearer ${localStorage.getItem("token")}`
+      })
+    })
+
   }
 
   // Get product by id
