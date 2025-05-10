@@ -17,7 +17,7 @@ export const routes: Routes = [
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path: 'login', component: LoginComponent, title: 'Login'},
   {path : 'products' , component : ProductComponent, title : 'Products' , canActivate : [authGuard]},
-  {path : 'products-details/:id' , component : ProductDetailsComponent, title : 'Product Details' , canActivate : [ProductDetailsGuard] },
+  {path : 'products-details/:id' , component : ProductDetailsComponent, title : 'Product Details' , canActivate : [ProductDetailsGuard, authGuard] },
   {path : 'order' , component : OrderComponent, title : 'Order'},
   {path : 'about' , component : AboutUsComponent, title : 'About Us',
     children: [
