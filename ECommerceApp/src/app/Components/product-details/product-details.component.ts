@@ -30,12 +30,15 @@ export class ProductDetailsComponent implements OnInit {
     this._activatedRoute.params.subscribe((params) => {
       this.currantID = Number(params['id']);
       this.getProduct(this.currantID);
+      // console.log('currantID:', this.currantID);
+      // console.log('idsArr:', this.idsArr);
+      // console.log('product:', this.product);
     });
     this._apiProductService.GetAllProducts().subscribe(products => {
       this.idsArr = products.map(p => Number(p.id));
       // console.log('idsArr (numbers):', this.idsArr);
     });
-    
+
   }
 
   getProduct(id: number): void {
@@ -58,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
     const nextId = this.idsArr[nextIndex];
     this.router.navigateByUrl(`/products-details/${nextId}`);
   }
-  
+
   GoPrevious(): void {
     if (this.idsArr.length === 0) return;
     const currantIndex = this.idsArr.findIndex(id => id === this.currantID);
@@ -194,6 +197,6 @@ export class ProductDetailsComponent implements OnInit {
 
 }
 
-// 
-// 
+//
+//
 // 11 */

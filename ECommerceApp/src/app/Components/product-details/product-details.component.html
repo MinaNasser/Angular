@@ -1,9 +1,14 @@
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
+      <!-- if no product is selected -->
+      <div *ngIf="!product" class="text-center">
+        <h1>Product Not Found</h1>
+      </div>
+      
       <div class="card shadow-lg rounded-4" appHighlightCard="gray" externalColor="pink">
         <!-- <img [src]="product?.imgUrl" class="card-img-top rounded-top-4" style="height: 350px; object-fit: cover;" alt="Product image"> -->
-        
+
         <!-- <img [src]="product?.imgUrl" class="card-img-top rounded-top-4"
         style="max-height: 350px; width: 100%; object-fit: scale-down; background-color: #f8f9fa;"
         alt="Product image">
@@ -11,7 +16,7 @@
            <img [src]="product?.imgUrl" class="card-img-top rounded-top-4"
            style="height: 350px; width: 100%; object-fit: contain; background-color: #f8f9fa;"
            alt="Product image">
-      
+
         <div class="card-body d-flex flex-column">
           <h5 class="card-title text-center fw-bold">{{product?.name}}</h5>
           <p class="card-text text-center mb-3 fs-5">Price: {{product?.price | currency:'EUR':'symbol'}}</p>
