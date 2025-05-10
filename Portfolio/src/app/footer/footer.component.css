@@ -1,0 +1,17 @@
+.footer {
+  background-color: #1a1a1a;
+}
+
+.footer a {
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #0d6efd; /* Bootstrap primary color on hover */
+}
+
+.contact-button .btn {
+  border-radius: 25px;
+  padding: 10px 20px;
+}

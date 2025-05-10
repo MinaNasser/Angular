@@ -1,0 +1,50 @@
+<h3>Add Recipe | Reactive Forms</h3>
+<hr />
+
+<form [formGroup]="recipeForm" (ngSubmit)="handleSubmitForm()">
+  <div class="mb-3">
+    <label for="recipeName" class="form-label">Recipe Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="recipeName"
+      aria-describedby="nameHelp"
+      formControlName="recipeName"
+    />
+    @if(recipeForm.controls['recipeName'].invalid &&
+    recipeForm.controls['recipeName'].touched){
+    <div id="nameHelp" class="form-text text-danger">
+      @if(recipeForm.controls['recipeName'].hasError('required')){
+      <span>Required</span>
+      } @else if(recipeForm.controls['recipeName'].hasError('minlength')){
+      <span>Min length is 3 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="5"
+      name="description"
+      formControlName="description"
+    ></textarea>
+    @if(formControls['description'].invalid &&
+    formControls['description'].touched){
+    <div id="descriptionHelp" class="form-text text-danger">
+      @if(formControls['description'].hasError('required')){
+      <span>Required</span>
+      } @else if(formControls['description'].hasError('minlength')){
+      <span>Min length is 10 characters</span>
+      } @else {
+      <span>Max length is 200 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="recipeForm.invalid">
+    Submit
+  </button>
+</form>

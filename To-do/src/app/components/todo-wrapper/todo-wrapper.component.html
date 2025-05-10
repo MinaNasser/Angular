@@ -1,0 +1,11 @@
+<div class="container border border-danger p-3">
+  <h2 class="text-center">To-Do App!</h2>
+
+  <app-todo-form (newTodoEvent)="addTodo($event)"></app-todo-form>
+  <app-todo-list
+  [todos]="todos"
+  (deleteTodoEvent)="deleteTodo($event)"
+  (toggleTodoEvent)="toggleComplete($event)">
+</app-todo-list>
+
+</div>

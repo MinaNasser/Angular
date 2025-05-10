@@ -1,0 +1,9 @@
+<h1>Product Detaila for Product id {{id}}</h1>
+
+@if (product==undefined) {
+    <h3>Sorry Can Not Found Product With Id {{id}}</h3>
+}
+@else{
+    <h1>{{product.name}}</h1>
+    <h1>{{product.price}}</h1>
+}

@@ -1,0 +1,16 @@
+
+<div class="container">
+    <select class="form-control" [(ngModel)]="selectedCatagory" >
+        @for (item of Categories; track $index) {
+
+            <option [value]="item.id">{{item.name}}</option>
+        }
+    </select>
+    <button class="btn btn-primary" (click)="filter()">Filter</button>
+<div class="row gy-2" >
+    
+    @for (item of Products; track $index) {
+        <app-product-card class="col-4" [Product]="item"></app-product-card>
+    }
+</div>
+</div>

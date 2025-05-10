@@ -1,0 +1,11 @@
+<!-- Container -->
+<div class="container mt-4">
+  <app-search (sendToParent)="onSearch($event)"></app-search>
+
+  <!-- كروت المستخدمين -->
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 mb-4" *ngFor="let user of filteredUserList">
+      <app-user-card [user]="user"></app-user-card>
+    </div>
+  </div>
+</div>

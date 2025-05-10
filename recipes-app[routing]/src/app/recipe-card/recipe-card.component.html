@@ -1,0 +1,21 @@
+<div class="card h-100">
+  <img [src]="recipeItem.image" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">{{ recipeItem.name | uppercase }}</h5>
+    <ul class="card-text">
+      @for(ingredient of recipeItem.ingredients; track $index){
+      <li>{{ ingredient }}</li>
+      }
+    </ul>
+    <p>Date: {{ recipeItem.releaseDate | date : "medium" }}</p>
+    <p>Rate: {{ recipeItem.rating | rate  }}</p>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="handleNavigate(recipeItem.id)">
+      View
+    </button>
+    <button class="btn btn-danger mx-2" (click)="handleDelete(recipeItem.id)">
+      Delete
+    </button>
+  </div>
+</div>

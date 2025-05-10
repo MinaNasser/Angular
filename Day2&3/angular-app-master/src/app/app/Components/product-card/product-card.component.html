@@ -1,0 +1,8 @@
+<div class="card"  >
+  <img [src]="Product.imgURL" class="card-img-top" [alt]="Product.name">
+  <div class="card-body">
+    <h5 class="card-title">{{Product.name}}</h5>
+    <p class="card-text">{{Product.price |currency:"EGP"}}</p>
+    <a href="#" class="btn btn-primary" (click)="add()">Add to cart</a>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.pill-group {
+    /* // make the list items appear in a row instead of a column */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+    padding-inline-start: 0;
+  }
+  

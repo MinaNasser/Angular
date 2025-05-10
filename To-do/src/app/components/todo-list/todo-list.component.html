@@ -1,0 +1,14 @@
+<div class="border border-success p-3">
+  <h4>Tasks</h4>
+  <ul class="list-group">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let todo of todos; let i = index"
+      [ngClass]="{ 'completed': todo.completed }"
+      (click)="toggleTodo(i)"
+    >
+      {{ todo.text }}
+      <button class="btn btn-danger btn-sm" (click)="deleteTodo(i); $event.stopPropagation()">Delete</button>
+    </li>
+  </ul>
+</div>
