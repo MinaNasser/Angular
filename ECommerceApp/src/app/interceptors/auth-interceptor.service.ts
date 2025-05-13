@@ -17,7 +17,7 @@ export function authInterceptor(req :HttpRequest<any>,next : HttpHandlerFn){
       if(event.type==HttpEventType.Response){
         if(event.status==200){
           console.log("success");
-          console.log(event);
+          // console.log(event);
           // console.log(event.body);
         }
         else{
