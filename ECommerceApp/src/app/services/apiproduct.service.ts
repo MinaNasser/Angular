@@ -18,6 +18,7 @@ export class APIProductService {
       headers: new HttpHeaders({
         "authorization":this._usrAuth.getToken(),
         // `Bearer ${localStorage.getItem("token")}`
+
       })
     })
 
