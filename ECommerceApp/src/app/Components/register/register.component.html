@@ -14,14 +14,14 @@
             formControlName="name">
           <small class="form-text text-muted">We'll never share your name with anyone else.</small>
           <div class="text-danger">
-            @if (name().invalid && name().touched) {
-            @if (name().errors?.['required']) {
+            @if (name?.invalid && name?.touched) {
+            @if (name?.errors?.['required']) {
             <div>Name is required</div>
-            } @else if (name().errors?.['minlength']) {
+            } @else if (name?.errors?.['minlength']) {
             <div>Min length is 5 characters</div>
-            } @else if (name().errors?.['maxlength']) {
+            } @else if (name?.errors?.['maxlength']) {
             <div>Max length is 10 characters</div>
-            } @else if (name().errors?.['pattern']) {
+            } @else if (name?.errors?.['pattern']) {
             <div>Name can only contain letters and numbers</div>
             }
             }
@@ -35,10 +35,10 @@
             formControlName="email">
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
           <div class="text-danger">
-            @if (email().invalid && email().touched) {
-            @if (email().errors?.['required']) {
+            @if (email?.invalid && email?.touched) {
+            @if (email?.errors?.['required']) {
             <div>Email is required</div>
-            } @else if (email().errors?.['email']) {
+            } @else if (email?.errors?.['email']) {
             <div>Email is invalid</div>
             }
             }
@@ -51,12 +51,12 @@
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
             formControlName="password">
           <div class="text-danger">
-            @if (password().invalid && password().touched) {
-            @if (password().errors?.['required']) {
+            @if (password?.invalid && password?.touched) {
+            @if (password?.errors?.['required']) {
             <div>Password is required</div>
-            } @else if (password().errors?.['minlength']) {
+            } @else if (password?.errors?.['minlength']) {
             <div>Min length is 8 characters</div>
-            } @else if (password().errors?.['pattern']) {
+            } @else if (password?.errors?.['pattern']) {
             <div>Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
               character</div>
             }
@@ -70,7 +70,7 @@
           <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
             formControlName="confirmPassword">
           <div class="text-danger">
-            @if (userRegisterForm.errors?.['passwordMismatch'] && confirmPassword().touched) {
+            @if (userRegisterForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
             <div class="text-danger">Passwords do not match</div>
             }
           </div>
@@ -84,10 +84,10 @@
             <label for="city">City</label>
             <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
             <div class="text-danger">
-              @if (city().invalid && city().touched) {
-              @if (city().errors?.['required']) {
+              @if (city?.invalid && city?.touched) {
+              @if (city?.errors?.['required']) {
               <div>City is required</div>
-              } @else if (city().errors?.['minlength']) {
+              } @else if (city?.errors?.['minlength']) {
               <div>Min length is 3 characters</div>
               }
               }
@@ -99,10 +99,10 @@
             <label for="street">Street</label>
             <input type="text" class="form-control" id="street" placeholder="Street" formControlName="street">
             <div class="text-danger">
-              @if (street().invalid && street().touched) {
-              @if (street().errors?.['required']) {
+              @if (street?.invalid && street?.touched) {
+              @if (street?.errors?.['required']) {
               <div>Street is required</div>
-              } @else if (street().errors?.['minlength']) {
+              } @else if (street?.errors?.['minlength']) {
               <div>Min length is 3 characters</div>
               }
               }
@@ -119,4 +119,3 @@
   </div>
 </div>
 
-<h3>{{userRegisterForm.value | json}}</h3>

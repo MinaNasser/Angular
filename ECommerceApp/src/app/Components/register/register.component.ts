@@ -1,6 +1,6 @@
 
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   userRegisterForm: FormGroup;
   /**
    *
@@ -49,28 +49,40 @@ export class RegisterComponent {
 
 
   }
+  ngOnInit(): void {
+    this.userRegisterForm.setValue({
+      name: 'Ahmed',
+      email: 'ahmed@gmail.com',
+      password: 'Asd@2030asd',
+      confirmPassword: 'Asd@2030asd',
+      Address: {
+        city: 'Cairo',
+        street: '10th of Ramadan'
+      }
+    })
+  }
   AddUser() {
     alert("User Added Successfully");
     console.log(this.userRegisterForm.value);
   }
-  name(): FormControl {
-    return this.userRegisterForm.get('name') as FormControl;
+  get name(){
+    return this.userRegisterForm.get('name');
   }
-  email(): FormControl {
-    return this.userRegisterForm.get('email') as FormControl;
+ get email() {
+    return this.userRegisterForm.get('email') ;
   }
-  password(): FormControl {
-    return this.userRegisterForm.get('password') as FormControl;
+  get password() {
+    return this.userRegisterForm.get('password') ;
   }
-  confirmPassword(): FormControl {
-    return this.userRegisterForm.get('confirmPassword') as FormControl;
+  get confirmPassword() {
+    return this.userRegisterForm.get('confirmPassword') ;
   }
 
-  city(): FormControl {
-    return this.userRegisterForm.get('Address.city') as FormControl;
+  get city() {
+    return this.userRegisterForm.get('Address.city') ;
   }
-  street(): FormControl {
-    return this.userRegisterForm.get('Address.street') as FormControl;
+  get street() {
+    return this.userRegisterForm.get('Address.street');
   }
 
 
