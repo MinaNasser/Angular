@@ -1,45 +1,113 @@
-<div class="container d-flex justify-content-center align-items-center ">
-  <!-- <h1>{{userRegisterForm.value | json}}</h1> -->
-  <form class="w-50" [formGroup]="userRegisterForm">
-    <div class="form-group">
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+  <form class="w-50 mx-auto bg-white p-4 rounded shadow" [formGroup]="userRegisterForm" (submit)="AddUser()">
+    <h3 class="text-center mb-4">Register</h3>
+
+    <!-- Full Name -->
+    <div class="form-group mb-3">
       <label for="exampleInputFullName">Full Name</label>
-      <input type="text" class="form-control" id="exampleInputFullName" aria-describedby="nameHelp"
-        placeholder="Enter full name" name="name" formControlName="name">
-      <small id="nameHelp" class="form-text text-muted">
-        We'll never share your name with anyone else.
-      </small>
+      <input type="text" class="form-control" id="exampleInputFullName" placeholder="Enter full name" formControlName="name">
+      <small class="form-text text-muted">We'll never share your name with anyone else.</small>
+      <div class="text-danger">
+        @if (name().invalid && name().touched) {
+          @if (name().errors?.['required']) {
+            <div>Name is required</div>
+          } @else if (name().errors?.['minlength']) {
+            <div>Min length is 5 characters</div>
+          } @else if (name().errors?.['maxlength']) {
+            <div>Max length is 10 characters</div>
+          } @else if (name().errors?.['pattern']) {
+            <div>Name can only contain letters and numbers</div>
+          }
+        }
+      </div>
     </div>
 
-
-    <div class="form-group">
+    <!-- Email -->
+    <div class="form-group mb-3">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        placeholder="Enter email" name="email" formControlName="email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="email">
+      <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div class="text-danger">
+        @if (email().invalid && email().touched) {
+          @if (email().errors?.['required']) {
+            <div>Email is required</div>
+          } @else if (email().errors?.['email']) {
+            <div>Email is invalid</div>
+          }
+        }
+      </div>
     </div>
-    <div class="form-group">
+
+    <!-- Password -->
+    <div class="form-group mb-3">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" accordion
-        name="password" formControlName="password">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+      <div class="text-danger">
+        @if (password().invalid && password().touched) {
+          @if (password().errors?.['required']) {
+            <div>Password is required</div>
+          } @else if (password().errors?.['minlength']) {
+            <div>Min length is 8 characters</div>
+          } @else if (password().errors?.['pattern']) {
+            <div>Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character</div>
+          }
+        }
+      </div>
     </div>
 
-    <div class="form-group" formGroupName="Address">
-      <div class="form-group">
+    <!-- Confirm Password -->
+    <div class="form-group mb-3">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword">
+      <div class="text-danger">
+        @if (confirmPassword().invalid && confirmPassword().touched) {
+          @if (confirmPassword().errors?.['required']) {
+            <div>Confirm Password is required</div>
+          } @else if (confirmPassword().errors?.['passwordMismatch']) {
+            <div>Passwords do not match</div>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div formGroupName="Address">
+      <!-- City -->
+      <div class="form-group mb-3">
         <label for="city">City</label>
-        <input type="text" class="form-control" id="city" placeholder="City" name="city" formControlName="city">
+        <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
+        <div class="text-danger">
+          @if (city().invalid && city().touched) {
+            @if (city().errors?.['required']) {
+              <div>City is required</div>
+            } @else if (city().errors?.['minlength']) {
+              <div>Min length is 3 characters</div>
+            }
+          }
+        </div>
       </div>
-      <div class="form-group">
+
+      <!-- Street -->
+      <div class="form-group mb-3">
         <label for="street">Street</label>
-        <input type="text" class="form-control" id="street" placeholder="Street" name="street" formControlName="street">
+        <input type="text" class="form-control" id="street" placeholder="Street" formControlName="street">
+        <div class="text-danger">
+          @if (street().invalid && street().touched) {
+            @if (street().errors?.['required']) {
+              <div>Street is required</div>
+            } @else if (street().errors?.['minlength']) {
+              <div>Min length is 3 characters</div>
+            }
+          }
+        </div>
       </div>
     </div>
 
-    <!-- button in center of form -->
-    <div class="d-flex justify-content-center m-5">
-      <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="userRegisterForm.invalid">Submit</button>
     </div>
-    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
   </form>
-
 </div>
+
 <h3>{{userRegisterForm.value | json}}</h3>
