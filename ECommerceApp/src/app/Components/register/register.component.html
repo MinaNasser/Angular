@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="container d-flex justify-content-center align-items-center ">
+  <!-- <h1>{{userRegisterForm.value | json}}</h1> -->
+  <form class="w-50" [formGroup]="userRegisterForm" >
+    <div class="form-group">
+      <label for="exampleInputFullName">Full Name</label>
+      <input type="text" class="form-control" id="exampleInputFullName" aria-describedby="nameHelp"
+        placeholder="Enter full name" name="name" formControlName="name">
+      <small id="nameHelp" class="form-text text-muted">
+        We'll never share your name with anyone else.
+      </small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1"  aria-describedby="emailHelp"
+        placeholder="Enter email" name="email" formControlName="email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" accordion
+        name="password" formControlName="password">
+    </div>
+    <!-- button in center of form -->
+     <div class="d-flex justify-content-center m-5">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+  </form>
+
+</div>

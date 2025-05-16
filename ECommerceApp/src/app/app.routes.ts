@@ -16,7 +16,7 @@ export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path: 'login', component: LoginComponent, title: 'Login'},
-  {path: 'Register', loadComponent:()=>import('./Components/register/register.component').then(r=>r.RegisterComponent)},
+  {path: 'register', loadComponent:()=>import('./Components/register/register.component').then(r=>r.RegisterComponent)},
 
 
   // {path : 'products' , component : ProductComponent, title : 'Products' , canActivate : [authGuard]},
