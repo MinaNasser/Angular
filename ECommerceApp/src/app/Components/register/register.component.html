@@ -76,6 +76,33 @@
           </div>
 
         </div>
+        <!-- Phone -->
+        <div formArrayName="phoneNumbers">
+          <div class="form-group mb-3" *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
+            <label for="phone">Phone Number</label>
+            <div class="container d-flex justify-content-between " >
+              <input type="text" class="form-control w-75" id="phone" placeholder="Phone" [formControlName]="i">
+            <button [disabled]="phoneNumbers.length === 1" type="button" class="btn btn-danger w-25" (click)="removePhoneNumber(i)">Remove</button>
+
+            </div>
+            <div class="text-danger">
+              @if (phoneNumber?.invalid && phoneNumber?.touched) {
+              @if (phoneNumber?.errors?.['required']) {
+              <div>Phone number is required</div>
+              } @else if (phoneNumber?.errors?.['minlength']) {
+              <div>Min length is 10 characters</div>
+              } @else if (phoneNumber?.errors?.['maxlength']) {
+              <div>Max length is 10 characters</div>
+              } @else if (phoneNumber?.errors?.['pattern']) {
+              <div>Phone number can only contain numbers</div>
+              }
+              }
+            </div>
+
+          </div>
+          <!-- Add more phone numbers button -->
+          <button type="button" class="btn btn-success my-5" (click)="addPhoneNumber()">Add Phone Number</button>
+        </div>
 
         <!-- Address -->
         <div formGroupName="Address">
@@ -118,4 +145,3 @@
     </div>
   </div>
 </div>
-
