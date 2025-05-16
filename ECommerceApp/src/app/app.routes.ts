@@ -1,3 +1,4 @@
+import { RegisterComponent } from './Components/register/register.component';
 import { OrderComponent } from './Components/order/order.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path: 'login', component: LoginComponent, title: 'Login'},
+  {path: 'Register', loadComponent:()=>import('./Components/register/register.component').then(r=>r.RegisterComponent)},
 
 
   // {path : 'products' , component : ProductComponent, title : 'Products' , canActivate : [authGuard]},
