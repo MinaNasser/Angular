@@ -1,7 +1,7 @@
 
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,69 +9,106 @@ import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   userRegisterForm: FormGroup;
-  /**
-   *
-   */
-  constructor() {
-    this.userRegisterForm = new FormGroup({
-      name: new FormControl('', [
+  constructor(private fb: FormBuilder) {
+    this.userRegisterForm = this.fb.group({
+      name: ['', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
         Validators.pattern('[a-zA-Z0-9]+')
-      ]),
-      email: new FormControl('', [
+      ]],
+      email: ['', [
         Validators.required,
         Validators.email
-      ]),
-      password: new FormControl('', [
+      ]],
+      password: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-
-      ]),
-      Address: new FormGroup({
-        city: new FormControl('', [
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')
+      ]],
+      confirmPassword: ['', Validators.required],
+      Address: this.fb.group({
+        city: ['', [
           Validators.required,
           Validators.minLength(3)
-        ]),
-        street: new FormControl('', [
+        ]],
+        street: ['', [
           Validators.required,
           Validators.minLength(3)
-        ])
+        ]]
       }),
-      phoneNumbers: new FormArray(
-        [
-          new FormControl('', [
-            Validators.required,
-            Validators.minLength(11),
-            Validators.maxLength(11),
-            Validators.pattern('[0-9]+')
-          ])
-        ]
-      )
-
-    }, { validators: this.matchPasswordsValidator });
-
-
+      phoneNumbers: this.fb.array([
+        this.fb.control('', [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          Validators.pattern('[0-9]+')
+        ])
+      ])
+    }, { validator: this.matchPasswordsValidator });
   }
-  ngOnInit(): void {
-    this.userRegisterForm.patchValue({
-      name: 'Ahmed',
-      email: 'ahmed@gmail.com',
-      password: 'Asd@2030asd',
-      confirmPassword: 'Asd@2030asd',
-      Address: {
-        city: 'Cairo',
-        street: '10th of Ramadan'
-      }
-    })
-  }
+
+
+  // constructor() {
+  //   this.userRegisterForm = new FormGroup({
+  //     name: new FormControl('', [
+  //       Validators.required,
+  //       Validators.minLength(5),
+  //       Validators.maxLength(10),
+  //       Validators.pattern('[a-zA-Z0-9]+')
+  //     ]),
+  //     email: new FormControl('', [
+  //       Validators.required,
+  //       Validators.email
+  //     ]),
+  //     password: new FormControl('', [
+  //       Validators.required,
+  //       Validators.minLength(8),
+  //       Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+  //     ]),
+  //     confirmPassword: new FormControl('', [
+  //       Validators.required,
+
+  //     ]),
+  //     Address: new FormGroup({
+  //       city: new FormControl('', [
+  //         Validators.required,
+  //         Validators.minLength(3)
+  //       ]),
+  //       street: new FormControl('', [
+  //         Validators.required,
+  //         Validators.minLength(3)
+  //       ])
+  //     }),
+  //     phoneNumbers: new FormArray(
+  //       [
+  //         new FormControl('', [
+  //           Validators.required,
+  //           Validators.minLength(11),
+  //           Validators.maxLength(11),
+  //           Validators.pattern('[0-9]+')
+  //         ])
+  //       ]
+  //     )
+
+  //   }, { validators: this.matchPasswordsValidator });
+
+
+  // }
+  // ngOnInit(): void {
+  //   this.userRegisterForm.patchValue({
+  //     name: 'Ahmed',
+  //     email: 'ahmed@gmail.com',
+  //     password: 'Asd@2030asd',
+  //     confirmPassword: 'Asd@2030asd',
+  //     Address: {
+  //       city: 'Cairo',
+  //       street: '10th of Ramadan'
+  //     }
+  //   })
+  // }
   AddUser() {
     alert("User Added Successfully");
     console.log(this.userRegisterForm.value);
