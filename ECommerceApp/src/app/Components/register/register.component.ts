@@ -17,7 +17,11 @@ export class RegisterComponent {
     this.userRegisterForm = new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),
-      password: new FormControl('')
+      password: new FormControl(''),
+      Address : new FormGroup({
+        city: new FormControl(''),
+        street: new FormControl('')
+      })
     });
    }
 }
