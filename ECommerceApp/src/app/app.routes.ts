@@ -1,4 +1,3 @@
-import { RegisterComponent } from './Components/register/register.component';
 import { OrderComponent } from './Components/order/order.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
@@ -12,11 +11,14 @@ import { authGuard } from './Guards/Auth.guard';
 import { ProductDetailsGuard } from './Guards/product-details.guard';
 import { AddProductComponent } from './Components/add-product/add-product.component';
 
+
 export const routes: Routes = [
   {path : '' ,redirectTo : 'home' , pathMatch : 'full' , title : 'Home'},
   {path : 'home' ,component : HomeComponent, title : 'Home'},
   {path: 'login', component: LoginComponent, title: 'Login'},
-  {path: 'register', loadComponent:()=>import('./Components/register/register.component').then(r=>r.RegisterComponent)},
+  {path: 'register',
+    loadComponent:()=>import('./Components/register/register.component').then(r=>r.RegisterComponent) ,
+    title: 'Register'},
 
 
   // {path : 'products' , component : ProductComponent, title : 'Products' , canActivate : [authGuard]},

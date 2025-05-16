@@ -1,6 +1,7 @@
+
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -20,47 +21,39 @@ export class RegisterComponent {
         Validators.minLength(5),
         Validators.maxLength(10),
         Validators.pattern('[a-zA-Z0-9]+')
-
       ]),
       email: new FormControl('', [
         Validators.required,
-        Validators.email,
+        Validators.email
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
 
       ]),
-      password: new FormControl('',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-        ]
-      ),
-      confirmPassword: new FormControl('',
-        [
-          Validators.required,
-          this.password.bind(this)
-        ]
-      ),
       Address: new FormGroup({
-        city: new FormControl('',
-          [
-            Validators.required,
-            Validators.minLength(3)
-          ]
-        ),
-        street: new FormControl('',
-          [
-            Validators.required,
-            Validators.minLength(3)
-          ]
-        )
+        city: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3)
+        ]),
+        street: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3)
+        ])
       })
-    });
+    }, { validators: this.matchPasswordsValidator });
+
+
   }
   AddUser() {
     alert("User Added Successfully");
     console.log(this.userRegisterForm.value);
   }
-  name() : FormControl {
+  name(): FormControl {
     return this.userRegisterForm.get('name') as FormControl;
   }
   email(): FormControl {
@@ -69,13 +62,24 @@ export class RegisterComponent {
   password(): FormControl {
     return this.userRegisterForm.get('password') as FormControl;
   }
-  confirmPassword() : FormControl {
+  confirmPassword(): FormControl {
     return this.userRegisterForm.get('confirmPassword') as FormControl;
   }
-  city() : FormControl {
+
+  city(): FormControl {
     return this.userRegisterForm.get('Address.city') as FormControl;
   }
-  street() : FormControl {
+  street(): FormControl {
     return this.userRegisterForm.get('Address.street') as FormControl;
   }
+
+
+  matchPasswordsValidator(group: AbstractControl): ValidationErrors | null {
+  const password = group.get('password')?.value;
+  const confirmPassword = group.get('confirmPassword')?.value;
+
+  return password === confirmPassword ? null : { passwordMismatch: true };
+}
+
+
 }
