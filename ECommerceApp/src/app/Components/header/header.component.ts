@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UserAuthService } from '../../services/userAuth.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,8 @@ import { CommonModule } from '@angular/common';
     RouterLink,
     RouterLinkActive,
     FormsModule ,
-    CommonModule
+    CommonModule,
+    AsyncPipe
 
   ],
   templateUrl: './header.component.html',
@@ -19,7 +22,10 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn!: boolean;
-  constructor( private _userAuth: UserAuthService) {}
+  counter$: Observable<number>;
+  constructor( private _userAuth: UserAuthService , private store: Store<{ counter: number }>) {
+    this.counter$ = this.store.select('counter');
+  }
   ngOnInit(): void {
     // this.isLoggedIn = this._userAuth.getUserLoggedIn();
     this._userAuth.getAuthSubject().subscribe((res) => {
