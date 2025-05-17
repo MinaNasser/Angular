@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { languageAction } from '../../store/language/language.action';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,8 @@ export class HeaderComponent implements OnInit {
       this.isLoggedIn = res;
     });
   }
-
+  changeLanguage(){
+    this.store.dispatch(languageAction({language: 'ar'}));
+  }
 
 }

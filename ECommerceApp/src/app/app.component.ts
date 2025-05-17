@@ -24,7 +24,16 @@ export class AppComponent {
    *
    */
   language$ :Observable<string>;
+  dir:string = "ltr";
   constructor(private store: Store<{ language: string }>) {
     this.language$ = this.store.select("language");
+    this.language$.subscribe(lang => {
+      if (lang == "en") {
+        this.dir = "ltr";
+      }
+      else {
+        this.dir = "rtl";
+      }
+    })
   }
 }
