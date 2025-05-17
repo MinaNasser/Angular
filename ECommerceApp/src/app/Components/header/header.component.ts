@@ -16,7 +16,6 @@ import { languageAction } from '../../store/language/language.action';
     FormsModule ,
     CommonModule,
     AsyncPipe
-
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -24,8 +23,18 @@ import { languageAction } from '../../store/language/language.action';
 export class HeaderComponent implements OnInit {
   isLoggedIn!: boolean;
   counter$: Observable<number>;
-  constructor( private _userAuth: UserAuthService , private store: Store<{ counter: number }>) {
+  language$: Observable<string>;
+  langChoose!:string;
+  currentLang!:string;
+  constructor( private _userAuth: UserAuthService ,
+     private store: Store<{ counter: number , language: string }>
+    ) {
     this.counter$ = this.store.select('counter');
+    this.language$ = this.store.select('language');
+    this.language$.subscribe((res) => {
+      this.langChoose = res;
+      this.currentLang = res; 
+    });
   }
   ngOnInit(): void {
     // this.isLoggedIn = this._userAuth.getUserLoggedIn();
@@ -34,7 +43,12 @@ export class HeaderComponent implements OnInit {
     });
   }
   changeLanguage(){
-    this.store.dispatch(languageAction({language: 'ar'}));
+    this.store.dispatch(languageAction(
+      {
+        language:  (this.currentLang === 'en') ? 'ar' : 'en'
+      }
+
+    ));
   }
 
 }
