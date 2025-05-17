@@ -6,7 +6,7 @@ const initialState = "en";
 
 export const languageReducer = createReducer(
   initialState,
-  on(languageAction, (state) => {
-    return state === "en" ? "ar" : "en";
+  on(languageAction, (state,action) => {
+     return action.language;
   })
 )

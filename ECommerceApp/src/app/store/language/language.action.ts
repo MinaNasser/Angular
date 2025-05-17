@@ -1,2 +1,4 @@
-import { createAction } from '@ngrx/store';
-export const languageAction = createAction("changeLanguage");
+import { createAction, props } from '@ngrx/store';
+export const languageAction = createAction("changeLanguage",
+  props<{ language: string }>()
+);
