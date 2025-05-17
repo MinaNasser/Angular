@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +13,18 @@ import { FooterComponent } from './Components/footer/footer.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
+    AsyncPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
-})  
+})
 export class AppComponent {
   title = 'ECommerceApp';
+  /**
+   *
+   */
+  language$ :Observable<string>;
+  constructor(private store: Store<{ language: string }>) {
+    this.language$ = this.store.select("language");
+  }
 }
