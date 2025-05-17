@@ -6,6 +6,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { authInterceptor } from './interceptors/auth-interceptor.service';
 import { provideStore } from '@ngrx/store';
 import { counterReducer } from './store/counter/counter.reducer';
+import { languageReducer } from './store/language/language.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     // provideHttpClient(withFetch()), for Api
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])), provideStore(
      {
-        counter: counterReducer
+        counter: counterReducer,
+        language: languageReducer
       }
     )]
 };
