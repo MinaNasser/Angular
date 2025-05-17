@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { decreaseCounter, increaseCounter } from '../../store/counter/counter.action';
 
 @Component({
   selector: 'app-test-ngrx',
@@ -15,20 +14,13 @@ export class TestNgrxComponent {
   /**
    *
    */
-  counter: Observable<number>;
-  count!: number;
-  constructor(private store: Store<{ counter: number }>) {
+  counter : Observable<number>;
+  count!:number ;
+  constructor(private store: Store<{counter : number}>) {
     this.counter = this.store.select('counter');
     // this.counter.subscribe((data) => {
     //   this.count = data;
     //   console.log(data);
     // });
   }
-  increament() {
-    this.store.dispatch(increaseCounter());
-  }
-  decrement() {
-    this.store.dispatch(decreaseCounter());
-  }
-
 }

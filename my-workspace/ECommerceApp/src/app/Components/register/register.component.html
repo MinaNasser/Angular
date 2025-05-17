@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Register</h1>
+      <hr>
+
+      <form class="w-50 mx-auto bg-white p-4 rounded shadow" [formGroup]="userRegisterForm" (submit)="AddUser()">
+        <h3 class="text-center mb-4">Register</h3>
+
+        <!-- Full Name -->
+        <div class="form-group mb-3">
+          <label for="exampleInputFullName">Full Name</label>
+          <input type="text" class="form-control" id="exampleInputFullName" placeholder="Enter full name"
+            formControlName="name">
+          <small class="form-text text-muted">We'll never share your name with anyone else.</small>
+          <div class="text-danger">
+            @if (name?.invalid && name?.touched) {
+            @if (name?.errors?.['required']) {
+            <div>Name is required</div>
+            } @else if (name?.errors?.['minlength']) {
+            <div>Min length is 5 characters</div>
+            } @else if (name?.errors?.['maxlength']) {
+            <div>Max length is 10 characters</div>
+            } @else if (name?.errors?.['pattern']) {
+            <div>Name can only contain letters and numbers</div>
+            }
+            }
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
+            formControlName="email">
+          <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <div class="text-danger">
+            @if (email?.invalid && email?.touched) {
+            @if (email?.errors?.['required']) {
+            <div>Email is required</div>
+            } @else if (email?.errors?.['email']) {
+            <div>Email is invalid</div>
+            }
+            }
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group mb-3">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+            formControlName="password">
+          <div class="text-danger">
+            @if (password?.invalid && password?.touched) {
+            @if (password?.errors?.['required']) {
+            <div>Password is required</div>
+            } @else if (password?.errors?.['minlength']) {
+            <div>Min length is 8 characters</div>
+            } @else if (password?.errors?.['pattern']) {
+            <div>Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
+              character</div>
+            }
+            }
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group mb-3">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
+            formControlName="confirmPassword">
+          <div class="text-danger">
+            @if (userRegisterForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
+            <div class="text-danger">Passwords do not match</div>
+            }
+          </div>
+
+        </div>
+        <!-- Phone -->
+        <div formArrayName="phoneNumbers">
+          <div class="form-group mb-3" *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
+            <label for="phone">Phone Number</label>
+            <div class="container d-flex justify-content-between " >
+              <input type="text" class="form-control w-75" id="phone" placeholder="Phone" [formControlName]="i">
+            <button [disabled]="phoneNumbers.length === 1" type="button" class="btn btn-danger w-25" (click)="removePhoneNumber(i)">Remove</button>
+
+            </div>
+            <div class="text-danger">
+              @if (phoneNumber?.invalid && phoneNumber?.touched) {
+              @if (phoneNumber?.errors?.['required']) {
+              <div>Phone number is required</div>
+              } @else if (phoneNumber?.errors?.['minlength']) {
+              <div>Min length is 10 characters</div>
+              } @else if (phoneNumber?.errors?.['maxlength']) {
+              <div>Max length is 10 characters</div>
+              } @else if (phoneNumber?.errors?.['pattern']) {
+              <div>Phone number can only contain numbers</div>
+              }
+              }
+            </div>
+
+          </div>
+          <!-- Add more phone numbers button -->
+          <button type="button" class="btn btn-success my-5" (click)="addPhoneNumber()">Add Phone Number</button>
+        </div>
+
+        <!-- Address -->
+        <div formGroupName="Address">
+          <!-- City -->
+          <div class="form-group mb-3">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
+            <div class="text-danger">
+              @if (city?.invalid && city?.touched) {
+              @if (city?.errors?.['required']) {
+              <div>City is required</div>
+              } @else if (city?.errors?.['minlength']) {
+              <div>Min length is 3 characters</div>
+              }
+              }
+            </div>
+          </div>
+
+          <!-- Street -->
+          <div class="form-group mb-3">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street" placeholder="Street" formControlName="street">
+            <div class="text-danger">
+              @if (street?.invalid && street?.touched) {
+              @if (street?.errors?.['required']) {
+              <div>Street is required</div>
+              } @else if (street?.errors?.['minlength']) {
+              <div>Min length is 3 characters</div>
+              }
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary" [disabled]="userRegisterForm.invalid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

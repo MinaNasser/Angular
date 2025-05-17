@@ -1,3 +1,7 @@
 <p>test-ngrx works!</p>
-<!-- test-ngrx.component.html -->
-<h1>Counter: {{ counter | async }}</h1>
+
+<div class="d-flex align-items-center">
+  <button class="btn btn-danger"(click)="decrement()"> -1</button>
+  <p class="fs-4 m-4">{{counter | async}}</p>
+  <button class="btn btn-success" (click)="increament()"> +1 </button>
+</div>

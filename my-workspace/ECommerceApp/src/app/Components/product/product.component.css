@@ -1,0 +1,23 @@
+/* Custom search bar and dropdown styles */
+.form-control, .form-select {
+  border-radius: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btn-outline-danger {
+  border-radius: 20px;
+}
+
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  border-radius: 15px 15px 0 0;
+}
+
+.card-body {
+  padding: 20px;
+}
