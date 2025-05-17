@@ -34,7 +34,7 @@ export const routes: Routes = [
     {path : 'values' , component : ValuesComponent, title : 'Values'},
   ]},
   {path : 'add-product' , component : AddProductComponent, title : 'Add Product', canActivate : [authGuard]},
-
+    {path:'test-ngrx', loadComponent:()=>import('./Components/test-ngrx/test-ngrx.component').then(r=>r.TestNgrxComponent), title: 'Test Ngrx'},
 
 
   //Wild Card Route for 404 request
