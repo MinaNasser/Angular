@@ -1,10 +1,12 @@
+
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-test-ngrx',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './test-ngrx.component.html',
   styleUrl: './test-ngrx.component.css'
 })
@@ -16,9 +18,9 @@ export class TestNgrxComponent {
   count!:number ;
   constructor(private store: Store<{counter : number}>) {
     this.counter = this.store.select('counter');
-    this.counter.subscribe(data => {
-      // console.log(data);
-      this.count = data;
-    });
+    // this.counter.subscribe((data) => {
+    //   this.count = data;
+    //   console.log(data);
+    // });
   }
 }
