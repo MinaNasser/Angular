@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     this.language$ = this.store.select('language');
     this.language$.subscribe((res) => {
       this.langChoose = res;
-      this.currentLang = res; 
+      this.currentLang = res;
     });
   }
   ngOnInit(): void {
@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
       }
 
     ));
+    
   }
 
 }
